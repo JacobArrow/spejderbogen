@@ -1,5 +1,9 @@
+<script>
+	export let title = 'Forside';
+</script>
+
 <svelte:head>
-	<title>Spejderbogen - Forside</title>
+	<title>Spejderbogen - {title}</title>
 </svelte:head>
 
 <button class="btn btn-primary">daisyUI Button</button>
