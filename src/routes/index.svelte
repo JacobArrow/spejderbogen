@@ -2,13 +2,11 @@
 	<title>Spejderbogen - Forside</title>
 </svelte:head>
 
-<h1>Welcome to SvelteKit</h1>
-<p>Visit <a href="https://kit.svelte.dev">kit.svelte.dev</a> to read the documentation</p>
-
-<button>test button</button>
+<button class="btn btn-primary">daisyUI Button</button>
+<button class="button">test button</button>
 
 <style lang="scss">
-	button {
+	.button {
 		@apply w-full;
 	}
 </style>
