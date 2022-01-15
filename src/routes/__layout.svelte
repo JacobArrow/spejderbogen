@@ -1,16 +1,16 @@
 <script>
 	import '../app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
-	import { title as titleStore } from '../lib/data/misc';
+	import { navTitel } from '$lib/data/misc.js';
 
-	let title;
+	let title = import.meta.env.VITE_DEFAULT_TITLE;
 
-	titleStore.subscribe((value) => {
-		title = value;
-	});
+	// navTitel.subscribe((value) => {
+	// 	title = value;
+	// });
 </script>
 
-<Navbar title={$title} />
-<main class="p-4 sm:p-10 md:p-10 lg:p-10">
+<Navbar {title} />
+<main class="prose p-4 sm:p-10 md:p-10 lg:p-10">
 	<slot />
 </main>

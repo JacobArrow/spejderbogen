@@ -1,6 +1,16 @@
 import { writable } from 'svelte/store';
 
-export const title = writable('Spejderhjælpen');
-export function setTitle(value) {
-	title.set(value);
+function createNavTitelStore() {
+	const navTitel = writable(import.meta.env.VITE_DEFAULT_TITLE);
+	function setNavTitel(value) {
+		navTitel.set(value);
+	}
+
+	const { subscribe } = navTitel;
+	return {
+		subscribe,
+		setNavTitel
+	};
 }
+
+export const navTitel = createNavTitelStore();

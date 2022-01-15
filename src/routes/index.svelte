@@ -1,13 +1,9 @@
-<script>
-	export let title = 'Forside';
-</script>
-
 <svelte:head>
-	<title>Spejderbogen - {title}</title>
+	<title>{import.meta.env.VITE_DEFAULT_TITLE} - Forside</title>
 </svelte:head>
 
 <button class="btn btn-primary">daisyUI Button</button>
-<button class="button">test button</button>
+<a href="/sange/1">link</a>
 
 <style lang="scss">
 	.button {

@@ -11,7 +11,7 @@
 		</button>
 	</div>
 	<div class="flex-1 px-2 mx-2">
-		<span class="text-lg font-bold"> {title} </span>
+		<span class="text-lg font-bold"><a href="/"> {title} </a></span>
 	</div>
 	<div class="flex-none">
 		<button class="btn btn-square btn-ghost">
