@@ -2,12 +2,19 @@
 	import '../app.css';
 	import Navbar from '$lib/components/Navbar.svelte';
 	import { navTitel } from '$lib/data/misc.js';
+	import { onMount } from 'svelte';
+	import { themeChange } from 'theme-change';
 
 	let title = import.meta.env.VITE_DEFAULT_TITLE;
 
 	// navTitel.subscribe((value) => {
 	// 	title = value;
 	// });
+
+	//required for themeChange
+	onMount(() => {
+		themeChange(false);
+	});
 </script>
 
 <Navbar {title} />

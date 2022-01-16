@@ -35,6 +35,7 @@
 	"dependencies": {
 		"daisyui": "^1.23.0",
 		"sass": "^1.48.0",
-		"svelte-material-icons": "^1.0.3"
+		"svelte-material-icons": "^1.0.3",
+		"theme-change": "^2.0.2"
 	}
 }
