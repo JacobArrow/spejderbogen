@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
 
-	let title = import.meta.env.VITE_DEFAULT_TITLE;
+	let title = `${import.meta.env.VITE_DEFAULT_TITLE}`;
 
 	// navTitel.subscribe((value) => {
 	// 	title = value;
