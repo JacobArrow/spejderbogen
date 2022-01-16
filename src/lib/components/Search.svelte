@@ -10,7 +10,7 @@
 	type="text"
 	placeholder="Søg sange..."
 	class="input input-ghost w-full max-w-lg"
-	class:rounded-b-none={inputText.length}
+	class:rounded-b-none={(inputText.length && inputFocus) || resultHover}
 	bind:value={inputText}
 	on:focus={() => (inputFocus = true)}
 	on:blur={() => (inputFocus = false)}

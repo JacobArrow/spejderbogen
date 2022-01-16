@@ -8,7 +8,7 @@
 <ul
 	on:mouseleave={() => (hover = false)}
 	on:mouseenter={() => (hover = true)}
-	class="search-result absolute menu compact py-3 shadow-lg bg-base-100 rounded-t-none rounded-box w-full max-w-lg mt-12 text-base-content"
+	class="search-result absolute menu compact py-3 shadow-lg bg-base-100 rounded-t-none rounded-box w-full max-w-lg mt-12 text-base-content z-50"
 >
 	<li class="menu-title">
 		<span> Resultater </span>
