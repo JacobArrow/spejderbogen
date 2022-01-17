@@ -18,6 +18,6 @@
 </script>
 
 <Navbar {title} />
-<main class="prose p-4 sm:p-10 md:p-10 lg:p-10">
+<main class="prose p-4 max-w-none sm:p-10 md:p-10 lg:p-10">
 	<slot />
 </main>

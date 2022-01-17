@@ -17,10 +17,15 @@
 		</button>
 	</div>
 	<div class="px-2 mx-2 hidden sm:flex">
-		<span class="text-lg font-bold"><a href="/"> {title} </a></span>
+		<span class="text-lg font-bold uppercase"><a href="/"> {title} </a></span>
 	</div>
 	<div class="form-control flex-1 w-full relative">
 		<Search />
+	</div>
+	<div class="md:flex hidden items-stretch">
+		<a class="btn btn-ghost btn-sm rounded-btn text-base"> Alle sange </a>
+		<a class="btn btn-ghost btn-sm rounded-btn text-base"> Kategorier </a>
+		<a class="btn btn-ghost btn-sm rounded-btn text-base"> Forfattere </a>
 	</div>
 	<div class="justify-end items-end">
 		<button
