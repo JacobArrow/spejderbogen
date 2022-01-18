@@ -28,7 +28,7 @@
 			{message}
 		</code>
 		<div class="justify-center card-actions">
-			<a href="/" class="btn btn-primary no-underline">TILBAGE</a>
+			<a href="/" class="btn btn-primary no-underline text-white">TILBAGE</a>
 		</div>
 	</div>
 </div>
