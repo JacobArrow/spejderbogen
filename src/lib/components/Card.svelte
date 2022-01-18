@@ -13,6 +13,7 @@
 				<div class="badge mr-1 badge-primary">123</div>
 				Sangtitel
 			</h2>
+			<!-- TODO: add auto slow scroll -->
 			<p class="my-0 line-clamp-3">
 				Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus
 				veritatis sed molestiae voluptates incidunt iure sapiente. Rerum reiciendis beatae tenetur
@@ -35,9 +36,6 @@
 </div>
 
 <style lang="scss">
-	.card-actions:last-child {
-		@apply mt-0;
-	}
 	.card {
 		&:hover {
 			transition: all 0.2s ease-in-out;

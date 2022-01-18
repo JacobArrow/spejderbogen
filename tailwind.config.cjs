@@ -15,7 +15,7 @@ const config = {
 		require('@tailwindcss/line-clamp'),
 		require('daisyui')
 	],
-	darkMode: 'class',
+	important: true,
 	daisyui: {
 		themes: ['light', 'dark']
 	}

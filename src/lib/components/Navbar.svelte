@@ -10,22 +10,26 @@
 	export let title = '';
 </script>
 
-<div class="navbar mb-2 shadow-lg bg-neutral text-neutral-content flex">
+<div class="navbar shadow-lg bg-neutral text-neutral-content flex fixed w-full z-50">
 	<div class="flex-none md:hidden sm:flex">
 		<button class="btn btn-square btn-ghost stroke-current">
 			<MenuIcon size="24px" />
 		</button>
 	</div>
-	<div class="px-2 mx-2 hidden sm:flex">
+	<div class="px-2 mx-2 hidden md:flex">
 		<span class="text-lg font-bold uppercase"><a href="/"> {title} </a></span>
 	</div>
-	<div class="form-control flex-1 w-full relative">
+	<div class="form-control flex-1 w-full relative mx-2 sm:mx-0">
 		<Search />
 	</div>
 	<div class="md:flex hidden items-stretch">
-		<a class="btn btn-ghost btn-sm rounded-btn text-base"> Alle sange </a>
-		<a class="btn btn-ghost btn-sm rounded-btn text-base"> Kategorier </a>
-		<a class="btn btn-ghost btn-sm rounded-btn text-base"> Forfattere </a>
+		<a href="/sange" class="btn btn-ghost btn-sm lg:btn-md rounded-btn text-base"> Alle sange </a>
+		<a href="/kategorier" class="btn btn-ghost btn-sm lg:btn-md rounded-btn text-base">
+			Kategorier
+		</a>
+		<a href="/forfattere" class="btn btn-ghost btn-sm lg:btn-md rounded-btn text-base">
+			Forfattere
+		</a>
 	</div>
 	<div class="justify-end items-end">
 		<button

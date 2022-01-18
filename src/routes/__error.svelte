@@ -18,7 +18,7 @@
 	<title>{import.meta.env.VITE_DEFAULT_TITLE} - Fejl: {status}</title>
 </svelte:head>
 
-<div class="card text-center shadow-2xl">
+<div class="card text-center shadow-2xl max-w-3xl m-auto">
 	<div class="px-10 pt-10">
 		<h1 class="text-9xl mb-0">{status}</h1>
 	</div>
@@ -28,7 +28,7 @@
 			{message}
 		</code>
 		<div class="justify-center card-actions">
-			<a href="/"><button class="btn btn-primary">TILBAGE</button></a>
+			<a href="/" class="btn btn-primary no-underline">TILBAGE</a>
 		</div>
 	</div>
 </div>
