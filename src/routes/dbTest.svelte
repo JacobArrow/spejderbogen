@@ -1,5 +1,5 @@
 <script>
-	import supabase from '$lib/data/db.js';
+	import supabase from '$data/db.js';
 	let json = '';
 
 	async function createSongs() {

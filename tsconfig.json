@@ -23,13 +23,8 @@
 		"allowJs": true,
 		"checkJs": true,
 		"paths": {
-			"$lib": ["src/lib"],
-			"$lib/*": ["src/lib/*"],
-			"$components": ["src/lib/components"],
 			"$components/*": ["src/lib/components/*"],
-			"$data": ["src/lib/data"],
 			"$data/*": ["src/lib/data/*"],
-			"$functions": ["src/lib/functions"],
 			"$functions/*": ["src/lib/functions/*"]
 		}
 	},

@@ -1,8 +1,8 @@
-import supabase from '$lib/data/db.js';
+import supabase from '$data/db.js';
 
 export async function api(request) {
 	const { data, error, status } = await supabase.from('songs').select(`
-	id, name,
+	id, number, name, text,
 	authors (id, name)
 `);
 	if (error) console.log('error', error);

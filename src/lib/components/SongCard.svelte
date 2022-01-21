@@ -1,5 +1,9 @@
 <script>
 	import HeartIcon from 'svelte-material-icons/HeartOutline.svelte';
+	export let number = 0;
+	export let name = '';
+	export let text = '';
+	export let category = {};
 
 	function handleClick() {
 		alert('you liked this');
@@ -9,9 +13,9 @@
 <div class="card cursor-pointer shadow-md">
 	<a href="/test" class="no-underline font-normal">
 		<div class="card-body p-5 pb-2">
-			<h2 class="card-title my-0">
-				<div class="badge mr-1 badge-primary">123</div>
-				Sangtitel
+			<h2 class="card-title my-0 line-clamp-1">
+				<div class="badge mr-1 badge-primary">{number}</div>
+				{name}
 			</h2>
 			<!-- TODO: add auto slow scroll -->
 			<p class="my-0 line-clamp-3">

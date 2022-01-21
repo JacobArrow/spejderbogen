@@ -1,4 +1,4 @@
-import supabase from '$lib/data/db.js';
+import supabase from '$data/db.js';
 
 export const getPagination = (page, size) => {
 	const limit = size ? +size : 3;

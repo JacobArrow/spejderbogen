@@ -1,7 +1,7 @@
-import supabase from '$lib/data/db.js';
+import supabase from '$data/db.js';
 
 export async function api(request) {
-	const { getPaginatedResults } = await import('$lib/functions/pagination');
+	const { getPaginatedResults } = await import('$functions/pagination');
 	const { props } = await getPaginatedResults();
 	if (
 		props.status === 200 &&
