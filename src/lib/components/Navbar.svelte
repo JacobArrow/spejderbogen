@@ -16,7 +16,7 @@
 			<MenuIcon size="24px" />
 		</button>
 	</div>
-	<div class="px-2 mx-2 hidden md:flex">
+	<div class="px-2 mr-2 hidden md:flex">
 		<span class="text-lg font-bold uppercase"><a href="/"> {title} </a></span>
 	</div>
 	<div class="form-control flex-1 w-full relative mx-2 sm:mx-0">
