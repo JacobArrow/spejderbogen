@@ -19,7 +19,7 @@
 
 <Navbar {title} />
 <main class="prose p-4 max-w-none pt-20 sm:p-10 sm:pt-28">
-	<div class="container mx-auto">
+	<div class="container mx-auto scroll-smooth">
 		<slot />
 	</div>
 </main>
