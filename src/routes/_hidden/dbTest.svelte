@@ -6,7 +6,6 @@
 		const { data: categories, error } = await supabase.from('categories').select();
 		const songs = JSON.parse(json);
 		if (error) throw new Error(error.message);
-		// console.log(categories);
 		for (const song of songs) {
 			var category = categories.filter((obj) => {
 				return obj.name === song.categori;

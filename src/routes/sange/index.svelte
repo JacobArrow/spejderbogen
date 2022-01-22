@@ -1,10 +1,14 @@
 <script lang="ts">
-	import Pagination from '$components/Pagination.svelte';
 	import PaginatedList from '$components/PaginatedList.svelte';
 	import CardGrid from '$components/CardGrid.svelte';
-	import { setParam, getParam } from '$functions/urlParams';
-	import { afterUpdate, onMount } from 'svelte';
 	import Card from '$components/SongCard.svelte';
+	import { encode, decode } from '$functions/convertUrl';
+	let encodeStr = '';
+	let decodeStr = '';
+
+	encodeStr = encode('ååh abe');
+	decodeStr = decode(encodeStr);
+	console.log(encodeStr, decodeStr);
 
 	async function getData() {
 		const res = await self.fetch('/api/songs.json');
@@ -27,7 +31,7 @@
 {:then data}
 	<CardGrid>
 		<PaginatedList {data} let:data={indexedData} page={0}>
-			<Card number={indexedData.number} name={indexedData.name} />
+			<Card {...indexedData} />
 		</PaginatedList>
 	</CardGrid>
 {:catch error}

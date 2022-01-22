@@ -1,9 +1,12 @@
 <script>
 	import HeartIcon from 'svelte-material-icons/HeartOutline.svelte';
+	import { encode } from '$functions/convertUrl';
+	export let id = 0;
 	export let number = 0;
 	export let name = '';
 	export let text = '';
-	export let category = {};
+	export let categories = {};
+	export let authors = [];
 
 	function handleClick() {
 		alert('you liked this');
@@ -11,23 +14,31 @@
 </script>
 
 <div class="card cursor-pointer shadow-md">
-	<a href="/test" class="no-underline font-normal">
-		<div class="card-body p-5 pb-2">
+	<a href="/sange/{encode(name)}" class="no-underline font-normal h-full">
+		<div class="card-body p-5 pb-2 h-full justify-between">
 			<h2 class="card-title my-0 line-clamp-1">
 				<div class="badge mr-1 badge-primary">{number}</div>
 				{name}
 			</h2>
 			<!-- TODO: add auto slow scroll -->
-			<p class="my-0 line-clamp-3">
-				Rerum reiciendis beatae tenetur excepturi aut pariatur est eos. Sit sit necessitatibus
-				veritatis sed molestiae voluptates incidunt iure sapiente. Rerum reiciendis beatae tenetur
-				excepturi aut pariatur est eos. Sit sit necessitatibus veritatis sed molestiae voluptates
-				incidunt iure sapiente.
+			<p class="my-0 line-clamp-3 h-">
+				{text}
 			</p>
 			<div class="card-actions flex items-center">
-				<a href="/" class="link link-hover no-underline font-normal"
-					><div class="badge badge-ghost">Kategori</div></a
-				>
+				{#if Object.keys(categories).length}
+					<a
+						href="/kategorier/{encode(categories?.name)}"
+						class="link link-hover no-underline font-normal"
+						><div class="badge badge-ghost">{categories?.name}</div></a
+					>
+				{/if}
+				{#if authors.length}
+					<a
+						href="/forfattere/{encode(authors[0]?.name)}"
+						class="link link-hover no-underline font-normal"
+						><div class="badge badge-ghost">{authors[0]?.name}</div></a
+					>
+				{/if}
 				<button
 					on:click|preventDefault={handleClick}
 					class="btn btn-square btn-ghost stroke-current m-0 ml-auto"

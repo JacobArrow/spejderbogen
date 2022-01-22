@@ -13,7 +13,6 @@
 
 	function setPagination(selectedPage) {
 		const { from: f, to: t } = getPagination(selectedPage, show);
-		console.log(f, t);
 		from = f;
 		to = t;
 		range = getPaginationRange(page, { min: 0, total: pages, length: 5 });

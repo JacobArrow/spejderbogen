@@ -9,7 +9,6 @@
 	let setY;
 	export let data;
 	export let page;
-	$: console.log(y);
 
 	function pagination() {
 		setY = y;

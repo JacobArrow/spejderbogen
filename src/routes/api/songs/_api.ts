@@ -3,6 +3,7 @@ import supabase from '$data/db.js';
 export async function api(request) {
 	const { data, error, status } = await supabase.from('songs').select(`
 	id, number, name, text,
+	categories (id, name),
 	authors (id, name)
 `);
 	if (error) console.log('error', error);
