@@ -56,7 +56,7 @@ const config = {
 					'--tab-radius': '0.5rem'
 				},
 				light: {
-					primary: '#570df8',
+					primary: '#023968',
 					'primary-focus': '#4506cb',
 					'primary-content': '#ffffff',
 					secondary: '#f000b8',

@@ -17,21 +17,3 @@ export const getPaginationRange = (current, { min = 0, total = 10, length = 5 } 
 
 	return Array.from({ length: length }, (el, i) => start + i);
 };
-
-export async function getPaginatedResults(page = 1) {
-	const { from, to } = getPagination(page, 10);
-	const { data, count, status } = await supabase
-		.from('songs')
-		.select('*', { count: 'exact' })
-		.order('id', { ascending: true })
-		.range(from, to);
-
-	return {
-		props: {
-			data: data,
-			count: count,
-			page: +page,
-			status: status
-		}
-	};
-}
