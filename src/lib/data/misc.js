@@ -14,3 +14,29 @@ function createNavTitelStore() {
 }
 
 export const navTitel = createNavTitelStore();
+
+function createDrawerStore() {
+	const drawer = writable(false);
+
+	function open() {
+		drawer.set(true);
+	}
+
+	function close() {
+		drawer.set(true);
+	}
+
+	function toggle() {
+		drawer.update((n) => !n);
+	}
+
+	const { subscribe } = drawer;
+	return {
+		subscribe,
+		open,
+		close,
+		toggle
+	};
+}
+
+export const drawer = createDrawerStore();

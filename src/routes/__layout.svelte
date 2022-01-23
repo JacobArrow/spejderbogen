@@ -1,7 +1,7 @@
 <script>
 	import '../app.css';
 	import Navbar from '$components/Navbar.svelte';
-	import { navTitel } from '$data/misc.js';
+	import Drawer from '$components/Drawer.svelte';
 	import { onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
 
@@ -17,9 +17,11 @@
 	});
 </script>
 
-<Navbar {title} />
-<main class="prose p-4 max-w-none pt-20 sm:p-10 sm:pt-28">
-	<div class="container mx-auto scroll-smooth">
-		<slot />
-	</div>
-</main>
+<Drawer>
+	<Navbar {title} />
+	<main class="prose p-4 max-w-none pt-20 sm:p-10 sm:pt-28">
+		<div class="container mx-auto scroll-smooth">
+			<slot />
+		</div>
+	</main>
+</Drawer>

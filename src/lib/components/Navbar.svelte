@@ -7,12 +7,15 @@
 	import SunIcon from 'svelte-material-icons/WeatherSunny.svelte';
 	import MoonIcon from 'svelte-material-icons/WeatherNight.svelte';
 
+	import { NAVBAR_LINKS } from '$data/links';
+	import { drawer } from '$data/misc';
+
 	export let title = '';
 </script>
 
 <div class="navbar shadow-lg bg-neutral text-neutral-content flex fixed w-full z-50">
 	<div class="flex-none md:hidden sm:flex">
-		<button class="btn btn-square btn-ghost stroke-current">
+		<button class="btn btn-square btn-ghost stroke-current" on:click={drawer.toggle}>
 			<MenuIcon size="24px" />
 		</button>
 	</div>
@@ -23,13 +26,11 @@
 		<Search />
 	</div>
 	<div class="md:flex hidden items-stretch">
-		<a href="/sange" class="btn btn-ghost btn-sm lg:btn-md rounded-btn text-base"> Alle sange </a>
-		<a href="/kategorier" class="btn btn-ghost btn-sm lg:btn-md rounded-btn text-base">
-			Kategorier
-		</a>
-		<a href="/forfattere" class="btn btn-ghost btn-sm lg:btn-md rounded-btn text-base">
-			Forfattere
-		</a>
+		{#each NAVBAR_LINKS as link}
+			<a href={link.link} class="btn btn-ghost btn-sm lg:btn-md rounded-btn text-base">
+				{link.name}
+			</a>
+		{/each}
 	</div>
 	<div class="justify-end items-end">
 		<button
