@@ -19,6 +19,10 @@
 	}
 </script>
 
+<svelte:head>
+	<title>{import.meta.env.VITE_DEFAULT_TITLE} - Sange</title>
+</svelte:head>
+
 {#await getData()}
 	<p>Fetching data...</p>
 {:then data}
