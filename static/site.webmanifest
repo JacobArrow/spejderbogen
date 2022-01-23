@@ -1,7 +1,8 @@
 {
 	"short_name": "Spejderbogen",
 	"name": "Spejderbogen - din digitale spejderlomme",
-	"start_url": "/",
+	"start_url": "./",
+	"scope": ".",
 	"display": "fullscreen",
 	"theme_color": "#000",
 	"background_color": "#fff",
