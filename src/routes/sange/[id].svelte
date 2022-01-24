@@ -11,4 +11,4 @@
 	<title>{import.meta.env.VITE_DEFAULT_TITLE} - {decode(slug)}</title>
 </svelte:head>
 
-<p>{decode(slug)}</p>
+<p>Sang: {decode(slug)}</p>
