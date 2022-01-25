@@ -12,3 +12,4 @@
 </svelte:head>
 
 <p>Sang: {decode(slug)}</p>
+<p>kan du se mig?</p>

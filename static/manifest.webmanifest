@@ -1,6 +1,6 @@
 {
 	"short_name": "Spejderbogen",
-	"name": "Spejderbogen - din digitale spejderlomme",
+	"name": "Spejderbogen",
 	"start_url": "./",
 	"scope": ".",
 	"display": "fullscreen",
