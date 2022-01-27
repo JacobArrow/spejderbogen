@@ -4,6 +4,11 @@
 	import Drawer from '$components/Drawer.svelte';
 	import { onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
+	import { isOnline } from '$data/misc';
+	import createLocalDatabase from '$data/db';
+
+	let online = false;
+	$: isOnline.set(online);
 
 	let title = `${import.meta.env.VITE_DEFAULT_TITLE}`;
 
@@ -12,8 +17,9 @@
 	// });
 
 	//required for themeChange
-	onMount(() => {
+	onMount(async () => {
 		themeChange(false);
+		await createLocalDatabase();
 	});
 </script>
 
@@ -25,3 +31,5 @@
 		</div>
 	</main>
 </Drawer>
+
+<svelte:window bind:online />

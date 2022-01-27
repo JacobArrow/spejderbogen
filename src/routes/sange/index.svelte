@@ -1,29 +1,25 @@
 <script lang="ts">
+	//Components
 	import PaginatedList from '$components/PaginatedList.svelte';
 	import CardGrid from '$components/CardGrid.svelte';
 	import Card from '$components/SongCard.svelte';
 
-	async function getData() {
-		const res = await self.fetch('/api/songs.json');
+	//Data
+	import { liveQuery } from 'dexie';
+	import { db } from '$data/db';
 
-		if (res.ok) {
-			const data = await res.json();
-			return data;
-		}
+	$: data = liveQuery(async () => {
+		const data = await db.songs.toArray();
 
-		const { message } = await res.json();
-
-		return {
-			error: new Error(message)
-		};
-	}
+		return data;
+	});
 </script>
 
 <svelte:head>
 	<title>{import.meta.env.VITE_DEFAULT_TITLE} - Sange</title>
 </svelte:head>
 
-{#await getData()}
+<!-- {#await getData()}
 	<p>Fetching data...</p>
 {:then data}
 	<CardGrid>
@@ -33,4 +29,12 @@
 	</CardGrid>
 {:catch error}
 	<pre>{error}</pre>
-{/await}
+{/await} -->
+
+{#if $data}
+	<CardGrid>
+		<PaginatedList data={$data} let:data={indexedData} page={0}>
+			<Card {...indexedData} />
+		</PaginatedList>
+	</CardGrid>
+{/if}
