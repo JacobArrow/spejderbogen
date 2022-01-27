@@ -1,4 +1,4 @@
-import supabase from '$data/db.js';
+import supabase from '$data/_db.js';
 
 export async function api(request) {
 	const { data, error, status } = await supabase.from('songs').select(`
