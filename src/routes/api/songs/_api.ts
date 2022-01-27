@@ -8,7 +8,11 @@ export async function api(request) {
 `);
 	if (error) console.log('error', error);
 
-	if (status === 200 && request.method !== 'GET' && request.headers.accept !== 'application/json') {
+	if (
+		status === 200 &&
+		request.request.method !== 'GET' &&
+		request.headers.accept !== 'application/json'
+	) {
 		return {
 			status: 303,
 			headers: {

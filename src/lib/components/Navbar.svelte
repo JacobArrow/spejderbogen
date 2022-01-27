@@ -15,7 +15,9 @@
 	export let title = '';
 </script>
 
-<div class="navbar shadow-lg bg-neutral text-neutral-content flex fixed w-full z-50">
+<div
+	class="navbar shadow-lg bg-neutral text-neutral-content flex inset-x-0 sticky top-0 w-full z-50"
+>
 	<div class="flex-none xl:hidden sm:flex">
 		<button class="btn btn-square btn-ghost stroke-current" on:click={drawer.toggle}>
 			<MenuIcon size="24px" />
