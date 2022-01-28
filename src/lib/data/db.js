@@ -22,7 +22,7 @@ async function getData() {
 }
 
 export default async function createLocalDatabase() {
-	if (!isOnline) {
+	if (isOnline) {
 		const data = await getData();
 		db.songs
 			.bulkPut(data)
