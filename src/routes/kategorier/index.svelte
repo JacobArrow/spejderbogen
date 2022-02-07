@@ -23,7 +23,12 @@
 	<div class="max-w-4xl mx-auto">
 		<CardGrid xlCols={2}>
 			<PaginatedList data={$data} let:data={indexedData} page={0}>
-				<Card content={indexedData.name} badgeContent={`${indexedData.songCount} sange`} />
+				<Card
+					subPath={'kategorier'}
+					path={indexedData.name}
+					content={indexedData.name}
+					badgeContent={`${indexedData.songCount} sange`}
+				/>
 			</PaginatedList>
 		</CardGrid>
 	</div>

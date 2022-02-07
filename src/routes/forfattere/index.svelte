@@ -16,7 +16,7 @@
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_DEFAULT_TITLE} - Kategorier</title>
+	<title>{import.meta.env.VITE_DEFAULT_TITLE} - Forfattere</title>
 </svelte:head>
 
 {#if $data}
@@ -24,6 +24,8 @@
 		<CardGrid xlCols={2}>
 			<PaginatedList data={$data} let:data={indexedData} show={15} page={0}>
 				<Card
+					subPath={'forfattere'}
+					path={indexedData.name}
 					content={indexedData.name}
 					badgeContent={indexedData.songCount > 1
 						? `${indexedData.songCount} sange`
