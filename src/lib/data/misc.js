@@ -40,3 +40,19 @@ function createDrawerStore() {
 }
 
 export const drawer = createDrawerStore();
+
+function createNetworkStatusStore() {
+	const isOnline = writable(false);
+
+	function set(bool) {
+		isOnline.set(bool);
+	}
+
+	const { subscribe } = isOnline;
+	return {
+		subscribe,
+		set
+	};
+}
+
+export const isOnline = createNetworkStatusStore();

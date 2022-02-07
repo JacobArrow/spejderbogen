@@ -4,6 +4,11 @@
 	import Drawer from '$components/Drawer.svelte';
 	import { onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
+	import { isOnline } from '$data/misc';
+	import createLocalDatabase from '$data/db';
+
+	let online = false;
+	$: isOnline.set(online);
 
 	let title = `${import.meta.env.VITE_DEFAULT_TITLE}`;
 
@@ -11,9 +16,16 @@
 	// 	title = value;
 	// });
 
-	//required for themeChange
-	onMount(() => {
+	function disableLogsInProduction() {
+		if (import.meta.env.VERCEL_ENV === 'production') {
+			console.log = function () {};
+		}
+	}
+
+	onMount(async () => {
 		themeChange(false);
+		disableLogsInProduction();
+		await createLocalDatabase();
 	});
 </script>
 
@@ -25,3 +37,5 @@
 		</div>
 	</main>
 </Drawer>
+
+<svelte:window bind:online />

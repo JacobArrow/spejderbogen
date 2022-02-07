@@ -1,7 +1,7 @@
 const defaultTheme = require('tailwindcss/defaultTheme');
 
 const config = {
-	content: ['./src/**/*.{html,js,svelte,ts}'],
+	content: ['./src/**/*.{html,js,svelte,ts}', './safelist.txt'],
 
 	theme: {
 		screens: {
@@ -13,7 +13,10 @@ const config = {
 	plugins: [
 		require('@tailwindcss/typography'),
 		require('@tailwindcss/line-clamp'),
-		require('daisyui')
+		require('daisyui'),
+		require('tailwind-safelist-generator')({
+			patterns: ['{screens}:grid-cols-{columns}']
+		})
 	],
 	important: true,
 	daisyui: {
