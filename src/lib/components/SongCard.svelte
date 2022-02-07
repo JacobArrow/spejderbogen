@@ -7,6 +7,7 @@
 	export let text = '';
 	export let categories = {};
 	export let authors = [];
+	export let melody = '';
 
 	function handleClick() {
 		alert('you liked this');
@@ -52,6 +53,7 @@
 
 <style lang="scss">
 	.card {
+		border: 0.1px solid rgb(0 0 0 / 0.1);
 		&:hover {
 			transition: all 0.2s ease-in-out;
 			transform: scale(1.02);

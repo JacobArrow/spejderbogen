@@ -19,18 +19,6 @@
 	<title>{import.meta.env.VITE_DEFAULT_TITLE} - Sange</title>
 </svelte:head>
 
-<!-- {#await getData()}
-	<p>Fetching data...</p>
-{:then data}
-	<CardGrid>
-		<PaginatedList {data} let:data={indexedData} page={0}>
-			<Card {...indexedData} />
-		</PaginatedList>
-	</CardGrid>
-{:catch error}
-	<pre>{error}</pre>
-{/await} -->
-
 {#if $data}
 	<CardGrid>
 		<PaginatedList data={$data} let:data={indexedData} page={0}>

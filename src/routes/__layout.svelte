@@ -16,9 +16,15 @@
 	// 	title = value;
 	// });
 
-	//required for themeChange
+	function disableLogsInProduction() {
+		if (import.meta.env.VERCEL_ENV === 'production') {
+			console.log = function () {};
+		}
+	}
+
 	onMount(async () => {
 		themeChange(false);
+		disableLogsInProduction();
 		await createLocalDatabase();
 	});
 </script>
