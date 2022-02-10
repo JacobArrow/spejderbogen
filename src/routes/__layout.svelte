@@ -12,10 +12,6 @@
 
 	let title = `${import.meta.env.VITE_DEFAULT_TITLE}`;
 
-	// navTitel.subscribe((value) => {
-	// 	title = value;
-	// });
-
 	function disableLogsInProduction() {
 		if (import.meta.env.VERCEL_ENV === 'production') {
 			console.log = function () {};

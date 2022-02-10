@@ -22,7 +22,7 @@
 {#if $data}
 	<CardGrid>
 		<PaginatedList data={$data} let:data={indexedData} page={0}>
-			<Card {...indexedData} />
+			<Card song={indexedData} />
 		</PaginatedList>
 	</CardGrid>
 {/if}
