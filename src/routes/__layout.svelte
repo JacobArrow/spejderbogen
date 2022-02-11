@@ -17,6 +17,7 @@
 			console.log = function () {};
 		}
 	}
+	console.log(import.meta.env.VERCEL_ENV);
 
 	onMount(async () => {
 		themeChange(false);
