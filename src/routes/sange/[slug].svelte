@@ -9,6 +9,7 @@
 	//Data
 	import { liveQuery } from 'dexie';
 	import { db } from '$data/db';
+	import { DEFAULT_TITLE } from '$data/env';
 
 	const slug = decode($page.params.slug);
 
@@ -20,7 +21,7 @@
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_DEFAULT_TITLE} - {slug}</title>
+	<title>{DEFAULT_TITLE} - {slug}</title>
 </svelte:head>
 
 {#if $song}

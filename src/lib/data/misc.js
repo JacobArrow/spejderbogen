@@ -1,7 +1,8 @@
 import { writable } from 'svelte/store';
+import { DEFAULT_TITLE } from './env';
 
 function createNavTitelStore() {
-	const navTitel = writable(import.meta.env.VITE_DEFAULT_TITLE);
+	const navTitel = writable(DEFAULT_TITLE);
 	function setNavTitel(value) {
 		navTitel.set(value);
 	}

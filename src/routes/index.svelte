@@ -1,9 +1,10 @@
 <script>
 	import Card from '$components/SongCard.svelte';
+	import { DEFAULT_TITLE } from '$data/env';
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_DEFAULT_TITLE} - Forside</title>
+	<title>{DEFAULT_TITLE} - Forside</title>
 </svelte:head>
 
 <button class="btn btn-primary">daisyUI Button</button>
