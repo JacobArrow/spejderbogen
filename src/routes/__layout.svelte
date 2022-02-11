@@ -13,11 +13,10 @@
 	let title = `${import.meta.env.VITE_DEFAULT_TITLE}`;
 
 	function disableLogsInProduction() {
-		if (import.meta.env.VERCEL_ENV === 'production') {
+		if (import.meta.env.VITE_VERCEL_ENV === 'production') {
 			console.log = function () {};
 		}
 	}
-	console.log(import.meta.env.VERCEL_ENV);
 
 	onMount(async () => {
 		themeChange(false);
