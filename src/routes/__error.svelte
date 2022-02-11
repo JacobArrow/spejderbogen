@@ -10,12 +10,13 @@
 </script>
 
 <script>
+	import { DEFAULT_TITLE } from '$data/env';
 	export let status;
 	export let message;
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_DEFAULT_TITLE} - Fejl: {status}</title>
+	<title>{DEFAULT_TITLE} - Fejl: {status}</title>
 </svelte:head>
 
 <div class="card text-center shadow-2xl max-w-3xl m-auto">

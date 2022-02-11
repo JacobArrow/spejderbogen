@@ -7,6 +7,7 @@
 	//Data
 	import { liveQuery } from 'dexie';
 	import { db } from '$data/db';
+	import { DEFAULT_TITLE } from '$data/env';
 
 	$: data = liveQuery(async () => {
 		const data = await db.categories.toArray();
@@ -16,7 +17,7 @@
 </script>
 
 <svelte:head>
-	<title>{import.meta.env.VITE_DEFAULT_TITLE} - Kategorier</title>
+	<title>{DEFAULT_TITLE} - Kategorier</title>
 </svelte:head>
 
 {#if $data}
