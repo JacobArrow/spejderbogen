@@ -17,7 +17,6 @@
 		if (VERCEL_ENV === 'production') {
 			console.log = function () {};
 		}
-		console.log(`Mode: ${VERCEL_ENV}`);
 	}
 
 	onMount(async () => {
