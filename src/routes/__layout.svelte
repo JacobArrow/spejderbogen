@@ -5,7 +5,7 @@
 	import { onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
 	import { isOnline } from '$data/misc';
-	import { DEFAULT_TITLE } from '$data/env';
+	import { DEFAULT_TITLE, VERCEL_ENV } from '$data/env';
 	import createLocalDatabase from '$data/db';
 
 	let online = false;
@@ -14,10 +14,11 @@
 	let title = `${DEFAULT_TITLE}`;
 
 	function disableLogsInProduction() {
-		if (import.meta.env.VITE_VERCEL_ENV === 'production') {
+		if (VERCEL_ENV === 'production') {
 			console.log = function () {};
 		}
 	}
+	console.log(VERCEL_ENV);
 
 	onMount(async () => {
 		themeChange(false);
