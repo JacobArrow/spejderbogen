@@ -17,8 +17,8 @@
 		if (VERCEL_ENV === 'production') {
 			console.log = function () {};
 		}
+		console.log(`Mode: ${VERCEL_ENV}`);
 	}
-	console.log(VERCEL_ENV);
 
 	onMount(async () => {
 		themeChange(false);
