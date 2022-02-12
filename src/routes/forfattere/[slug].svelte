@@ -18,13 +18,11 @@
 
 	$: data = liveQuery(async () => {
 		const author = await db.authors.where('name').equalsIgnoreCase(slug).first();
-		console.log(slug);
 		const authors = await db.song_authors.where('author_id').equals(author.id).toArray();
 		const songIds = authors.map(function (author) {
 			return author['song_id'];
 		});
 		const songs = await db.songs.where('id').anyOf(songIds).toArray();
-		console.log(songs);
 
 		return { songs, author };
 	});
