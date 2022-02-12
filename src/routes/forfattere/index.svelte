@@ -3,6 +3,7 @@
 	import PaginatedList from '$components/PaginatedList.svelte';
 	import CardGrid from '$components/CardGrid.svelte';
 	import Card from '$components/CompactCard.svelte';
+	import Header from '$components/Header.svelte';
 
 	//Data
 	import { liveQuery } from 'dexie';
@@ -21,9 +22,10 @@
 </svelte:head>
 
 {#if $data}
+	<Header>Alle forfattere</Header>
 	<div class="max-w-4xl mx-auto">
 		<CardGrid xlCols={2}>
-			<PaginatedList data={$data} let:data={indexedData} show={15} page={0}>
+			<PaginatedList data={$data} let:data={indexedData} show={16} page={0}>
 				<Card
 					subPath={'forfattere'}
 					path={indexedData.name}

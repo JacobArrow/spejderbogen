@@ -15,9 +15,9 @@
 	<a href="/{subPath}/{encode(path)}" class="no-underline h-full">
 		<div class="card-body p-5 h-full">
 			<h2 class=" my-0 flex items-center justify-between">
-				{content}
+				<span class="overflow-hidden text-ellipsis whitespace-nowrap">{content}</span>
 				{#if badgeContent}
-					<div class="badge justify-self-end badge-primary">{badgeContent}</div>
+					<div class="badge justify-self-end badge-primary whitespace-nowrap">{badgeContent}</div>
 				{/if}
 			</h2>
 		</div>
