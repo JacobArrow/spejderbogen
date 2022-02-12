@@ -46,7 +46,7 @@
 			>
 				<Pagination count={$songs.length} bind:page={songNumber} show={1} offset={0} />
 			</div>
-			<div class="sm:mb-16 xl:mb-0" />
+			<div class="mb-16 xl:mb-0" />
 		{/if}
 	</div>
 {/if}
