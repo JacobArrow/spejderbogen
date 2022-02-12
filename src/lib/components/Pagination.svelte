@@ -9,6 +9,7 @@
 	export let to;
 	export let page = 0;
 	export let range = [];
+	export let offset = 1;
 	$: setPagination(page);
 
 	function setPagination(selectedPage) {
@@ -31,7 +32,7 @@
 				class="btn w-10 xs:w-12"
 				on:click={() => (page = number)}
 			>
-				{number + 1}
+				{number + offset}
 			</button>
 		{/each}
 		<button class="btn px-2 xs:px-4" on:click={() => (page = Math.min(++page, pages - 1))}>
