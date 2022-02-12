@@ -4,7 +4,7 @@
 	const dispatch = createEventDispatcher();
 	export let show = 1;
 	export let count = 0;
-	let pages = Math.round(count / show);
+	let pages = Math.ceil(count / show);
 	export let from;
 	export let to;
 	export let page = 0;

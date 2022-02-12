@@ -9,8 +9,8 @@
 	var drawerContent = document.getElementById('drawer-content');
 	export let data;
 	export let page;
-	export let show = 11;
-	$: sliced = data.slice(from, to + 1);
+	export let show = 9;
+	$: sliced = data.slice(from, to);
 
 	function pagination() {
 		y = drawerContent.scrollTop;

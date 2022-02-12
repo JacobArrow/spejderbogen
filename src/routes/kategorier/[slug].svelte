@@ -1,4 +1,8 @@
 <script lang="ts">
+	//Functions
+	import { page } from '$app/stores';
+	import { decode } from '$functions/convertUrl';
+
 	//Components
 	import PaginatedList from '$components/PaginatedList.svelte';
 	import CardGrid from '$components/CardGrid.svelte';
@@ -10,10 +14,13 @@
 	import { db } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
 
-	$: songs = liveQuery(async () => {
-		const songs = await db.songs.toArray();
+	const slug = decode($page.params.slug);
 
-		return songs;
+	$: data = liveQuery(async () => {
+		const category = await db.categories.where('name').equalsIgnoreCase(slug).first();
+		const songs = await db.songs.where('categori_id').equals(category.id).toArray();
+
+		return { category, songs };
 	});
 </script>
 
@@ -21,10 +28,10 @@
 	<title>{DEFAULT_TITLE} - Sange</title>
 </svelte:head>
 
-{#if $songs}
-	<Header>Alle sange</Header>
+{#if $data}
+	<Header>Kategori: {$data.category.name}</Header>
 	<CardGrid>
-		<PaginatedList data={$songs} let:data={indexedData} page={0}>
+		<PaginatedList data={$data.songs} let:data={indexedData} page={0}>
 			<Card song={indexedData} />
 		</PaginatedList>
 	</CardGrid>
