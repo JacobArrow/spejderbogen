@@ -8,7 +8,7 @@ db.version(1).stores({
 	authors: 'id, name, songCount',
 	song_authors: 'id, song_id, author_id',
 	categories: 'id, name, songCount',
-	songs: 'id, number, name, text, melody, categori_id',
+	songs: 'id, number, name, text, melody, categori_id, views',
 	likes: 'id'
 });
 

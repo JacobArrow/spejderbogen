@@ -1,8 +1,8 @@
 import supabase from '$data/_db.js';
 
-export async function api(request) {
+export async function getSongs(request) {
 	const { data, error, status } = await supabase.from('songs').select(`
-	id, number, name, text,
+	id, number, name, text, views,
 	categories (id, name),
 	authors (id, name), categori_id, melody
 `);
@@ -11,7 +11,7 @@ export async function api(request) {
 	if (
 		status === 200 &&
 		request.request.method !== 'GET' &&
-		request.headers.accept !== 'application/json'
+		request.request.headers.accept !== 'application/json'
 	) {
 		return {
 			status: 303,
@@ -25,4 +25,13 @@ export async function api(request) {
 		status: status,
 		body: data
 	};
+}
+
+export async function incrementViews(request) {
+	const headers = request.request.headers;
+	console.log("incrementing");
+    const { data, error } = await supabase.rpc("test", {
+		song_id: 1
+		}); 
+	if (error) console.log('error', error);
 }

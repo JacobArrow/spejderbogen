@@ -23,6 +23,12 @@
 		themeChange(false);
 		disableLogsInProduction();
 		await createLocalDatabase();
+		await self.fetch("/api/songs/increment", {
+    method: 'POST',
+    headers: {
+      'songId': '1'
+    },
+  })
 	});
 </script>
 
