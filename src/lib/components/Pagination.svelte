@@ -36,7 +36,7 @@
 				{number + offset}
 			</button>
 		{/each}
-		<button class="btn px-2 xs:px-4" on:click={() => (page = Math.min(++page, pages - 1))}>
+		<button class="btn px-2 xs:px-4" on:click={() => (page = Math.min(++page, pages - offset))}>
 			Næste
 		</button>
 	</div>

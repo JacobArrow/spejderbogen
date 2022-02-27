@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import { decode, encode } from '$functions/convertUrl';
 	import { goto } from '$app/navigation';
-	import { incrementSong } from '$functions/increment';
+	import { incrementCategory, incrementSong } from '$functions/increment';
 
 	//Components
 	import Song from '$components/Song.svelte';
@@ -32,6 +32,8 @@
 	$: song = liveQuery(async () => {
 		if (songNumber != undefined) {
 			const song = await db.songs.where('number').equals(songNumber).first();
+			incrementSong(song.id);
+			incrementCategory(song.categori_id);
 			if (encode(song.name) !== slug) goto(`${encode(song.name)}`, { replaceState: true });
 			return song;
 		}
