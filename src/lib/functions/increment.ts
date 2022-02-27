@@ -26,7 +26,7 @@ export const incrementSong = async (songid: number) => {
 };
 
 export const incrementCategory = async (categoryid: number) => {
-	console.log(categoryid, getDate(), getLastDate(categoryid, categoryPrefix))
+	console.log(categoryid, getDate(), getLastDate(categoryid, categoryPrefix));
 	if (getLastDate(categoryid, categoryPrefix) != getDate())
 		await self.fetch('/api/categories/increment', {
 			method: 'POST',

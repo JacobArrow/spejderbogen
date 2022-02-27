@@ -1,25 +1,29 @@
 <script>
 	import { getPagination, getPaginationRange } from '$functions/pagination';
-	import { createEventDispatcher } from 'svelte';
+	import { afterUpdate, createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
-	export let show = 1;
-	export let count = 0;
 	export let min = 0;
-	let pages = Math.ceil(count / show);
 	export let from;
 	export let to;
 	export let page = 0;
-	export let range = [];
 	export let offset = 1;
-	$: setPagination(page);
+	export let range = [];
+	export let show = 1;
+	export let count = 0;
+	$: pages = Math.ceil(count / show);
 
 	function setPagination(selectedPage) {
 		const { from: f, to: t } = getPagination(selectedPage, show);
 		from = f;
 		to = t;
-		range = getPaginationRange(page, { min: min, total: pages, length: 5 });
+		range = getPaginationRange(selectedPage, { min: min, total: pages, length: 5 });
+		console.log(range);
 		dispatch('clicked', {});
 	}
+
+	afterUpdate(() => {
+		setPagination(page);
+	});
 </script>
 
 {#if range.length > 1}

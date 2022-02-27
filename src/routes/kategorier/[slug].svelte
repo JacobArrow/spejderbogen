@@ -13,7 +13,7 @@
 	import { liveQuery } from 'dexie';
 	import { db } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
-import { incrementCategory } from '$functions/increment';
+	import { incrementCategory } from '$functions/increment';
 
 	const slug = decode($page.params.slug);
 
