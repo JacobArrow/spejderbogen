@@ -13,13 +13,14 @@
 	import { liveQuery } from 'dexie';
 	import { db } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
+	import { incrementCategory } from '$functions/increment';
 
 	const slug = decode($page.params.slug);
 
 	$: data = liveQuery(async () => {
 		const category = await db.categories.where('name').equalsIgnoreCase(slug).first();
 		const songs = await db.songs.where('categori_id').equals(category.id).toArray();
-
+		incrementCategory(category.id);
 		return { category, songs };
 	});
 </script>

@@ -1,29 +1,34 @@
 <script>
 	import { getPagination, getPaginationRange } from '$functions/pagination';
-	import { createEventDispatcher } from 'svelte';
+	import { afterUpdate, createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
-	export let show = 1;
-	export let count = 0;
-	let pages = Math.ceil(count / show);
+	export let min = 0;
 	export let from;
 	export let to;
 	export let page = 0;
-	export let range = [];
 	export let offset = 1;
-	$: setPagination(page);
+	export let range = [];
+	export let show = 1;
+	export let count = 0;
+	$: pages = Math.ceil(count / show);
 
 	function setPagination(selectedPage) {
 		const { from: f, to: t } = getPagination(selectedPage, show);
 		from = f;
 		to = t;
-		range = getPaginationRange(page, { min: 0, total: pages, length: 5 });
+		range = getPaginationRange(selectedPage, { min: min, total: pages, length: 5 });
+		console.log(range);
 		dispatch('clicked', {});
 	}
+
+	afterUpdate(() => {
+		setPagination(page);
+	});
 </script>
 
 {#if range.length > 1}
 	<div class="btn-group flex-nowrap">
-		<button class="btn px-2 xs:px-4" on:click={() => (page = Math.max(--page, 0))}>
+		<button class="btn px-2 xs:px-4" on:click={() => (page = Math.max(--page, min))}>
 			Forrige
 		</button>
 		{#each range as number}
@@ -35,7 +40,7 @@
 				{number + offset}
 			</button>
 		{/each}
-		<button class="btn px-2 xs:px-4" on:click={() => (page = Math.min(++page, pages - 1))}>
+		<button class="btn px-2 xs:px-4" on:click={() => (page = Math.min(++page, pages - offset))}>
 			Næste
 		</button>
 	</div>
