@@ -1,5 +1,5 @@
 const songPrefix = 'song-';
-const categoryPrefix = 'category-'
+const categoryPrefix = 'category-';
 
 function getLastDate(id: number, prefix: string) {
 	return localStorage.getItem(prefix + id);
@@ -14,25 +14,25 @@ function getDate() {
 }
 
 export const incrementSong = async (songid: number) => {
-    if(getLastDate(songid, songPrefix) != getDate())
-	await self.fetch('/api/songs/increment', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({ songid: songid})
-	});
+	if (getLastDate(songid, songPrefix) != getDate())
+		await self.fetch('/api/songs/increment', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ songid: songid })
+		});
 	setLastDate(songid, songPrefix);
 };
 
 export const incrementCategory = async (categoryid: number) => {
-    if(getLastDate(categoryid, songPrefix) != getDate())
-	await self.fetch('/api/categories/increment', {
-		method: 'POST',
-		headers: {
-			'Content-Type': 'application/json'
-		},
-		body: JSON.stringify({ categoryid: categoryid})
-	});
+	if (getLastDate(categoryid, songPrefix) != getDate())
+		await self.fetch('/api/categories/increment', {
+			method: 'POST',
+			headers: {
+				'Content-Type': 'application/json'
+			},
+			body: JSON.stringify({ categoryid: categoryid })
+		});
 	setLastDate(categoryid, songPrefix);
 };

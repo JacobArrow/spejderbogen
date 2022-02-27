@@ -3,7 +3,7 @@
 	import { page } from '$app/stores';
 	import { decode, encode } from '$functions/convertUrl';
 	import { goto } from '$app/navigation';
-	import { incrementSong } from '$functions/increment'
+	import { incrementSong } from '$functions/increment';
 
 	//Components
 	import Song from '$components/Song.svelte';
@@ -17,23 +17,26 @@
 
 	let slug = decode($page.params.slug);
 
-	$: songId = liveQuery(async () => {
-		const song = await db.songs.where('name').equalsIgnoreCase(slug).first();
-		return song.number;
-	});
-
-	$: song = liveQuery(async () => {
-		const song = await db.songs.where('number').equals(songNumber).first();
-		incrementSong(song.id);
-		if (encode(song.name) !== slug) goto(`${encode(song.name)}`, { replaceState: true });
-		return song;
-	});
-
 	$: songs = liveQuery(async () => {
 		const songs = await db.songs.toArray();
 		return songs;
 	});
-	
+
+	$: songId = liveQuery(async () => {
+		if ($songs) {
+			const song = await db.songs.where('name').equalsIgnoreCase(slug).first();
+			return song.number;
+		}
+	});
+
+	$: song = liveQuery(async () => {
+		if ($songId) {
+			const song = await db.songs.where('number').equals(songNumber).first();
+			incrementSong(song.id);
+			if (encode(song.name) !== slug) goto(`${encode(song.name)}`, { replaceState: true });
+			return song;
+		}
+	});
 </script>
 
 <svelte:head>

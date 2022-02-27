@@ -28,11 +28,7 @@ export async function getSongs(request) {
 }
 
 export async function incrementViews(request) {
-
-	if (
-		request.request.method !== 'POST' &&
-		request.request.headers.accept !== 'application/json'
-	) {
+	if (request.request.method !== 'POST' && request.request.headers.accept !== 'application/json') {
 		return {
 			status: 303,
 			headers: {
@@ -41,9 +37,9 @@ export async function incrementViews(request) {
 		};
 	}
 	const data = await request.request.json();
-    const { error, status } = await supabase.rpc("increment_song_views", {
+	const { error, status } = await supabase.rpc('increment_song_views', {
 		songid: data.songid
-		}); 
+	});
 	if (error) console.log('error', error);
 
 	return {
