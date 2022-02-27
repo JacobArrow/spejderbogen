@@ -4,6 +4,7 @@
 	const dispatch = createEventDispatcher();
 	export let show = 1;
 	export let count = 0;
+	export let min = 0;
 	let pages = Math.ceil(count / show);
 	export let from;
 	export let to;
@@ -16,14 +17,14 @@
 		const { from: f, to: t } = getPagination(selectedPage, show);
 		from = f;
 		to = t;
-		range = getPaginationRange(page, { min: 0, total: pages, length: 5 });
+		range = getPaginationRange(page, { min: min, total: pages, length: 5 });
 		dispatch('clicked', {});
 	}
 </script>
 
 {#if range.length > 1}
 	<div class="btn-group flex-nowrap">
-		<button class="btn px-2 xs:px-4" on:click={() => (page = Math.max(--page, 0))}>
+		<button class="btn px-2 xs:px-4" on:click={() => (page = Math.max(--page, min))}>
 			Forrige
 		</button>
 		{#each range as number}
