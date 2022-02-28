@@ -1,1 +1,5 @@
-<h1 class="mb-4 text-center"><slot /></h1>
+<script>
+    export let center = true;
+</script>
+
+<h1 class:text-center="{center}" class="mb-4"><slot /></h1>

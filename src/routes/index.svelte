@@ -1,41 +1,26 @@
 <script>
 	import Card from '$components/SongCard.svelte';
 	import { DEFAULT_TITLE } from '$data/env';
+
+	//Data
+	import { liveQuery } from 'dexie';
+	import { db } from '$data/db';
+	import PopularSongs from '$components/PopularSongs.svelte';
+	import Header from '$components/Header.svelte';
+
+	$: categories = liveQuery(async () => {
+		const categories = (await db.categories.reverse().sortBy('views')).slice(0, 4);
+		return categories;
+	});
 </script>
 
 <svelte:head>
 	<title>{DEFAULT_TITLE} - Forside</title>
 </svelte:head>
 
-<button class="btn btn-primary">daisyUI Button</button>
-<a href="/sange/1">link</a>
-
-<div class="grid xl:grid-cols-5 lg:grid-cols-4 md:grid-cols-3 xs:grid-cols-2 gap-4">
-	<Card />
-	<Card />
-	<Card />
-	<Card />
-	<Card />
-</div>
-
-<div class="carousel carousel-end w-screen">
-	<div class="carousel-item w-64 px-2 py-4 ml-3 sm:ml-8">
-		<Card />
-	</div>
-	<div class="carousel-item w-64 px-2 py-4">
-		<Card />
-	</div>
-	<div class="carousel-item w-64 px-2 py-4">
-		<Card />
-	</div>
-	<div class="carousel-item w-64 px-2 py-4 pr-4 sm:pr-10">
-		<Card />
-	</div>
-</div>
-
-<style lang="scss">
-	.carousel {
-		margin-left: 50%;
-		transform: translateX(-50%);
-	}
-</style>
+<Header>Populære sange</Header>
+{#if $categories}
+	{#each $categories as category}
+		<PopularSongs {category} />
+	{/each}
+{/if}

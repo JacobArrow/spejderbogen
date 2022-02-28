@@ -28,7 +28,7 @@
 
 <Drawer {title}>
 	<Navbar {title} />
-	<main class="prose p-4 max-w-none sm:p-10">
+	<main class="prose p-4 max-w-none sm:p-10 overflow-x-hidden">
 		<div class="container mx-auto scroll-smooth">
 			<slot />
 		</div>
