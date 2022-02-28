@@ -2,7 +2,7 @@ import supabase from '$data/_db.js';
 
 export async function api(request) {
 	const { data, error, status } = await supabase.from('categories').select(`
-	id, name
+	id, name, views
 `);
 	if (error) console.log('error', error);
 

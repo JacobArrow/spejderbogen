@@ -17,7 +17,6 @@
 		from = f;
 		to = t;
 		range = getPaginationRange(selectedPage, { min: min, total: pages, length: 5 });
-		console.log(range);
 		dispatch('clicked', {});
 	}
 
