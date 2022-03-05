@@ -13,6 +13,7 @@
 	import { liveQuery } from 'dexie';
 	import { db } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
+	import Card from '$components/Card.svelte';
 	let songNumber = 0;
 
 	$: slug = decode($page.params.slug);
@@ -42,16 +43,29 @@
 	<title>{DEFAULT_TITLE} - {slug}</title>
 </svelte:head>
 
-{#if $song}
-	<div class="mx-auto max-w-2xl">
+<div class="mx-auto max-w-2xl">
+	{#if $song}
 		<Song song={$song} />
 		{#if $songs}
 			<div
 				class="fixed xl:relative xl:flex xl:justify-center bottom-4 sm:bottom-10 xl:bottom-0 left-2/4 -translate-x-2/4 xl:col-span-full xl:mt-8"
 			>
-				<Pagination on:clicked={pagination} count={$songs.length - 2} page={songNumber} min={1} show={1} offset={0} />
+				<Pagination
+					on:clicked={pagination}
+					count={$songs.length - 2}
+					page={songNumber}
+					min={1}
+					show={1}
+					offset={0}
+				/>
 			</div>
 			<div class="mb-16 xl:mb-0" />
 		{/if}
-	</div>
-{/if}
+	{:else}
+		<Card>
+			<div class="h-80 flex justify-center items-center">
+				<div class="btn btn-ghost btn-lg loading before:h-9 before:w-9" />
+			</div>
+		</Card>
+	{/if}
+</div>

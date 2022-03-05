@@ -9,6 +9,7 @@
 	import { liveQuery } from 'dexie';
 	import { db } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
+	import CompactCard from '$components/Skeleton/CompactCard.svelte';
 
 	$: categories = liveQuery(async () => {
 		const categories = await db.categories.toArray();
@@ -21,10 +22,10 @@
 	<title>{DEFAULT_TITLE} - Kategorier</title>
 </svelte:head>
 
-{#if $categories}
-	<Header>Alle kategorier</Header>
-	<div class="max-w-4xl mx-auto">
-		<CardGrid xlCols={2}>
+<Header>Alle kategorier</Header>
+<div class="max-w-4xl mx-auto">
+	<CardGrid xlCols={2}>
+		{#if $categories}
 			<PaginatedList data={$categories} let:data={indexedData} page={0} show={16}>
 				<Card
 					subPath={'kategorier'}
@@ -33,6 +34,10 @@
 					badgeContent={`${indexedData.songCount} sange`}
 				/>
 			</PaginatedList>
-		</CardGrid>
-	</div>
-{/if}
+		{:else}
+			{#each Array(16) as _, i}
+				<CompactCard />
+			{/each}
+		{/if}
+	</CardGrid>
+</div>

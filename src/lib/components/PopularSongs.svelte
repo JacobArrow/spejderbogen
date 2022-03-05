@@ -6,7 +6,9 @@
 	import Card from './SongCard.svelte';
 	import Carousel from './Carousel.svelte';
 	import CarouselItem from './CarouselItem.svelte';
-import SubHeader from './SubHeader.svelte';
+	import SubHeader from './SubHeader.svelte';
+	import SkeletonSubHeader from './Skeleton/SubHeader.svelte';
+	import SongCard from './Skeleton/SongCard.svelte';
 
 	export let category;
 
@@ -18,22 +20,31 @@ import SubHeader from './SubHeader.svelte';
 	});
 </script>
 
-<SubHeader center={false}>Kategori: {category.name}</SubHeader>
 {#if $songs}
-<div class="hidden md:block">
-	<CardGrid>
-		{#each $songs as song (song.id)}
-			<Card {song} />
-		{/each}
-	</CardGrid>
-</div>
-<div class="block md:hidden">
-	<Carousel>
-		{#each $songs as song (song.id)}
-			<CarouselItem>
+<SubHeader center={false}>Kategori: {category.name}</SubHeader>
+	<div class="hidden md:block">
+		<CardGrid>
+			{#each $songs as song (song.id)}
 				<Card {song} />
-			</CarouselItem>
-		{/each}
-	</Carousel>
-</div>
+			{/each}
+		</CardGrid>
+	</div>
+	<div class="block md:hidden">
+		<Carousel>
+			{#each $songs as song (song.id)}
+				<CarouselItem>
+					<Card {song} />
+				</CarouselItem>
+			{/each}
+		</Carousel>
+	</div>
+{:else}
+	{#each Array(5) as _, i}
+		<SkeletonSubHeader />
+		<CardGrid>
+			{#each Array(6) as _, i}
+				<SongCard />
+			{/each}
+		</CardGrid>
+	{/each}
 {/if}

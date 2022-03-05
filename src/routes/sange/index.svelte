@@ -9,6 +9,7 @@
 	import { liveQuery } from 'dexie';
 	import { db } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
+	import SongCard from '$components/Skeleton/SongCard.svelte';
 
 	$: songs = liveQuery(async () => {
 		const songs = await db.songs.toArray();
@@ -21,11 +22,15 @@
 	<title>{DEFAULT_TITLE} - Sange</title>
 </svelte:head>
 
-{#if $songs}
-	<Header>Alle sange</Header>
-	<CardGrid>
+<Header>Alle sange</Header>
+<CardGrid>
+	{#if $songs}
 		<PaginatedList data={$songs} let:data={indexedData} page={0}>
 			<Card song={indexedData} />
 		</PaginatedList>
-	</CardGrid>
-{/if}
+	{:else}
+		{#each Array(9) as _, i}
+			<SongCard />
+		{/each}
+	{/if}
+</CardGrid>
