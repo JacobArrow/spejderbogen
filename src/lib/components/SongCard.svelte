@@ -5,7 +5,6 @@
 	//Components
 	import Card from './Card.svelte';
 	import Like from './Like.svelte';
-	import Song from './Song.svelte';
 
 	export let song;
 </script>

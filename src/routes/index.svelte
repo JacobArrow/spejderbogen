@@ -1,5 +1,4 @@
 <script>
-	import Card from '$components/SongCard.svelte';
 	import { DEFAULT_TITLE } from '$data/env';
 
 	//Data
@@ -7,6 +6,9 @@
 	import { db } from '$data/db';
 	import PopularSongs from '$components/PopularSongs.svelte';
 	import Header from '$components/Header.svelte';
+	import SubHeader from '$components/Skeleton/SubHeader.svelte';
+	import CardGrid from '$components/CardGrid.svelte';
+	import SongCard from '$components/Skeleton/SongCard.svelte';
 
 	$: categories = liveQuery(async () => {
 		const categories = (
@@ -24,5 +26,14 @@
 {#if $categories}
 	{#each $categories as category}
 		<PopularSongs {category} />
+	{/each}
+{:else}
+	{#each Array(5) as _, i}
+		<SubHeader />
+		<CardGrid>
+			{#each Array(6) as _, i}
+				<SongCard />
+			{/each}
+		</CardGrid>
 	{/each}
 {/if}

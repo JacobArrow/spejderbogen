@@ -34,7 +34,7 @@ const options = {
 async function getSongsByText(value) {
 	const songs = await db.songs.toArray().then((result) => {
 		const fuse = new Fuse(result, options);
-		return fuse.search(value);
+		return fuse.search(value, {limit: 10});
 	});
 	return songs;
 }
