@@ -3,7 +3,6 @@
 	import { liveQuery } from 'dexie';
 	import { db } from '$data/db';
 	import CardGrid from './CardGrid.svelte';
-	import PaginatedList from './PaginatedList.svelte';
 	import Card from './SongCard.svelte';
 	import Carousel from './Carousel.svelte';
 	import CarouselItem from './CarouselItem.svelte';

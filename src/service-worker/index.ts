@@ -11,6 +11,7 @@ const to_cache = build.concat(files);
 const staticAssets = new Set(to_cache);
 
 worker.addEventListener('install', (event) => {
+	worker.skipWaiting();
 	event.waitUntil(
 		caches
 			.open(FILES)

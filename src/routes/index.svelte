@@ -9,7 +9,9 @@
 	import Header from '$components/Header.svelte';
 
 	$: categories = liveQuery(async () => {
-		const categories = (await db.categories.reverse().sortBy('views')).slice(0, 4);
+		const categories = (
+			await db.categories.where('id').noneOf([1, 6, 8]).reverse().sortBy('views')
+		).slice(0, 5);
 		return categories;
 	});
 </script>
