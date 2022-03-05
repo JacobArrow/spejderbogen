@@ -3,8 +3,8 @@
 	import { afterUpdate, createEventDispatcher } from 'svelte';
 	const dispatch = createEventDispatcher();
 	export let min = 0;
-	export let from;
-	export let to;
+	export let from = 0;
+	export let to = 0;
 	export let page = 0;
 	export let offset = 1;
 	export let range = [];
@@ -17,7 +17,7 @@
 		from = f;
 		to = t;
 		range = getPaginationRange(selectedPage, { min: min, total: pages, length: 5 });
-		dispatch('clicked', {});
+		dispatch('clicked', {page});
 	}
 
 	afterUpdate(() => {

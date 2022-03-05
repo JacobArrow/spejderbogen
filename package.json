@@ -37,6 +37,7 @@
 		"@tailwindcss/line-clamp": "^0.3.1",
 		"daisyui": "^1.24.2",
 		"dexie": "^3.2.0",
+		"fuse.js": "^6.5.3",
 		"sass": "^1.48.0",
 		"svelte-material-icons": "^1.0.3",
 		"tailwind-safelist-generator": "^0.1.3",
