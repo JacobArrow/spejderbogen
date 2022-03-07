@@ -9,6 +9,8 @@
 	import SubHeader from '$components/Skeleton/SubHeader.svelte';
 	import CardGrid from '$components/CardGrid.svelte';
 	import SongCard from '$components/Skeleton/SongCard.svelte';
+	import Carousel from '$components/Carousel.svelte';
+	import CarouselItem from '$components/CarouselItem.svelte';
 
 	$: categories = liveQuery(async () => {
 		const categories = (
@@ -23,17 +25,31 @@
 </svelte:head>
 
 <Header>Populære sange</Header>
-{#if $categories}
+{#if $categories?.length}
 	{#each $categories as category}
 		<PopularSongs {category} />
 	{/each}
 {:else}
-	{#each Array(5) as _, i}
-		<SubHeader />
-		<CardGrid>
-			{#each Array(6) as _, i}
-				<SongCard />
-			{/each}
-		</CardGrid>
-	{/each}
+	<div class="hidden md:block">
+		{#each Array(5) as _, i}
+			<SubHeader />
+			<CardGrid>
+				{#each Array(6) as _, i}
+					<SongCard />
+				{/each}
+			</CardGrid>
+		{/each}
+	</div>
+	<div class="block md:hidden">
+		{#each Array(5) as _, i}
+			<SubHeader />
+			<Carousel>
+				{#each Array(6) as _, i}
+					<CarouselItem>
+						<SongCard />
+					</CarouselItem>
+				{/each}
+			</Carousel>
+		{/each}
+	</div>
 {/if}

@@ -20,7 +20,7 @@
 	});
 </script>
 
-{#if $songs}
+{#if $songs?.length}
 <SubHeader center={false}>Kategori: {category.name}</SubHeader>
 	<div class="hidden md:block">
 		<CardGrid>
@@ -39,7 +39,8 @@
 		</Carousel>
 	</div>
 {:else}
-	{#each Array(5) as _, i}
+	<div class="hidden md:block">
+		{#each Array(5) as _, i}
 		<SkeletonSubHeader />
 		<CardGrid>
 			{#each Array(6) as _, i}
@@ -47,4 +48,17 @@
 			{/each}
 		</CardGrid>
 	{/each}
+	</div>
+	<div class="block md:hidden">
+		{#each Array(5) as _, i}
+		<SkeletonSubHeader />
+		<Carousel>
+			{#each Array(6) as _, i}
+			<CarouselItem>
+				<SongCard />
+			</CarouselItem>
+			{/each}
+		</Carousel>
+	{/each}
+	</div>
 {/if}

@@ -11,7 +11,7 @@
 	import { db } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
 
-	$: data = liveQuery(async () => {
+	$: authors = liveQuery(async () => {
 		const data = await db.authors.where('songCount').aboveOrEqual(1).reverse().sortBy('songCount');
 
 		return data;
@@ -25,8 +25,8 @@
 <Header>Alle forfattere</Header>
 <div class="max-w-4xl mx-auto">
 	<CardGrid xlCols={2}>
-		{#if $data}
-			<PaginatedList data={$data} let:data={indexedData} show={16} page={0}>
+		{#if $authors?.length}
+			<PaginatedList data={$authors} let:data={indexedData} show={16} page={0}>
 				<Card
 					subPath={'forfattere'}
 					path={indexedData.name}

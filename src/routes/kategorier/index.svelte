@@ -25,7 +25,7 @@
 <Header>Alle kategorier</Header>
 <div class="max-w-4xl mx-auto">
 	<CardGrid xlCols={2}>
-		{#if $categories}
+		{#if $categories?.length}
 			<PaginatedList data={$categories} let:data={indexedData} page={0} show={16}>
 				<Card
 					subPath={'kategorier'}

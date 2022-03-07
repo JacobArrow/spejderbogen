@@ -24,7 +24,7 @@
 
 <Header>Alle sange</Header>
 <CardGrid>
-	{#if $songs}
+	{#if $songs?.length}
 		<PaginatedList data={$songs} let:data={indexedData} page={0}>
 			<Card song={indexedData} />
 		</PaginatedList>
