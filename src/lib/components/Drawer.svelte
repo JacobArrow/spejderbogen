@@ -5,6 +5,7 @@
 	//Misc
 	import { drawer } from '$data/misc';
 	import { DRAWER_LINKS } from '$data/links';
+	import { page } from '$app/stores';
 	export let title = '';
 </script>
 
@@ -35,8 +36,11 @@
 			</div>
 			<ul class="p-4 text-base-content">
 				{#each DRAWER_LINKS as link}
-					<li>
-						<a href={link.link} class="btn btn-ghost justify-start text-base"
+					<li on:click={drawer.close}>
+						<a
+							href={link.link}
+							class="btn btn-ghost justify-start text-base"
+							class:btn-active={$page.url.pathname === link.link}
 							><span class="mr-2"><svelte:component this={link.icon} size="24px" /></span>
 							{link.name}</a
 						>

@@ -24,7 +24,7 @@ function createDrawerStore() {
 	}
 
 	function close() {
-		drawer.set(true);
+		drawer.set(false);
 	}
 
 	function toggle() {
