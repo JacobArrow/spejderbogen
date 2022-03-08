@@ -17,7 +17,7 @@
 					<div class="badge badge-primary float-left">{song.number}</div>
 					<span class="line-clamp-1">{song.name}</span>
 				</h2>
-				<p class="my-0 whitespace-pre-wrap md:prose-lg" style="color:#1f2937">
+				<p class="my-0 whitespace-pre-wrap md:prose-lg">
 					{song.text}
 				</p>
 			</div>
