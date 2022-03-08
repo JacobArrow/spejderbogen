@@ -5,7 +5,7 @@
 	export let song;
 </script>
 
-<a class="flex-wrap active:bg-base-300 active:text-base-content px-4" href="/sange/{encode(song.item.name)}">
+<a class="flex-wrap active:bg-base-300 active:text-base-content px-4 rounded" href="/sange/{encode(song.item.name)}">
 	<div class="flex items-center min-w-0">
 		<div class="badge mr-2 badge-primary">{song.item.number}</div>
 		<div class="font-bold truncate text-base">{song.item.name}</div>

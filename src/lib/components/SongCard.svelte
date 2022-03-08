@@ -14,7 +14,7 @@
 		<a href="/sange/{encode(song.name)}" class="no-underline font-normal h-full">
 			<div class="card-body p-5 pb-2 h-full justify-between">
 				<h2 class="card-title my-0 flex items-center">
-					<div class="badge mr-2 badge-primary float-left">{song.number}</div>
+					<div class="badge badge-primary float-left">{song.number}</div>
 					<span class="line-clamp-1">{song.name}</span>
 				</h2>
 				<!-- TODO: add auto slow scroll -->

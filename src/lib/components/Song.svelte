@@ -14,14 +14,14 @@
 		<div class="card-body p-5 pb-2 h-full justify-between">
 			<div class="mx-auto">
 				<h2 class="card-title mb-2 my-0 flex items-center">
-					<div class="badge mr-2 badge-primary float-left">{song.number}</div>
+					<div class="badge badge-primary float-left">{song.number}</div>
 					<span class="line-clamp-1">{song.name}</span>
 				</h2>
-				<p class="my-0 whitespace-pre-wrap md:prose-lg">
+				<p class="my-0 whitespace-pre-wrap md:prose-lg" style="color:#1f2937">
 					{song.text}
 				</p>
 			</div>
-			<div class="card-actions flex items-center">
+			<div class="card-actions mt-4 flex items-center">
 				{#if Object.keys(song.categories).length}
 					<a
 						href="/kategorier/{encode(song.categories.name)}"
