@@ -21,7 +21,7 @@
 				<p class="my-0 line-clamp-3">
 					{song.text}
 				</p>
-				<div class="card-actions mt-4 flex items-center">
+				<div class="card-actions flex items-center">
 					{#if Object.keys(song.categories).length}
 						<a
 							href="/kategorier/{encode(song.categories?.name)}"
