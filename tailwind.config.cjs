@@ -7,7 +7,7 @@ const config = {
 		screens: {
 			xs: '475px',
 			...defaultTheme.screens
-		}
+		},
 	},
 
 	plugins: [
@@ -26,7 +26,7 @@ const config = {
 			{
 				dark: {
 					primary: '#023968',
-					'primary-focus': '#570df8',
+					'primary-focus': '#035196',
 					'primary-content': '#ffffff',
 					secondary: '#f000b8',
 					'secondary-focus': '#bd0091',
@@ -41,10 +41,10 @@ const config = {
 					'base-200': '#2a2e37',
 					'base-300': '#16181d',
 					'base-content': '#ebecf0',
-					info: '#66c6ff',
+					info: '#00A0D1',
 					success: '#87d039',
 					warning: '#e2d562',
-					error: '#ff6f6f',
+					error: '#C1002B',
 					'--border-color': 'var(--b3)',
 					'--rounded-box': '1rem',
 					'--rounded-btn': '0.5rem',
@@ -60,7 +60,7 @@ const config = {
 				},
 				light: {
 					primary: '#023968',
-					'primary-focus': '#4506cb',
+					'primary-focus': '#035196',
 					'primary-content': '#ffffff',
 					secondary: '#f000b8',
 					'secondary-focus': '#bd0091',
@@ -75,10 +75,10 @@ const config = {
 					'base-200': '#f9fafb',
 					'base-300': '#d1d5db',
 					'base-content': '#1f2937',
-					info: '#2094f3',
+					info: '#00A0D1',
 					success: '#009485',
 					warning: '#ff9900',
-					error: '#ff5724',
+					error: '#C1002B',
 					'--border-color': 'var(--b3)',
 					'--rounded-box': '1rem',
 					'--rounded-btn': '0.5rem',

@@ -14,7 +14,7 @@
 			<div class="badge border-base-300 bg-base-300 w-1/2 h-4 mt-1" />
 			<div class="badge border-base-300 bg-base-300 w-3/4 h-4 mt-1" />
         </div>
-		<div class="card-actions flex items-center mt-5">
+		<div class="card-actions flex items-center mt-2">
 			<div class="badge border-base-300 bg-base-300 w-24 h-3" />
 			<div class="badge border-base-300 bg-base-300 w-24 h-3" />
 			<Like disabled={true} songId={0} />

@@ -7,14 +7,17 @@ import FormatListIcon from 'svelte-material-icons/FormatListBulletedSquare.svelt
 import InfoIcon from 'svelte-material-icons/InformationOutline.svelte';
 
 export const NAVBAR_LINKS = [
+	{ name: 'Forside', link: '/' },
 	{ name: 'Alle sange', link: '/sange' },
 	{ name: 'Kategorier', link: '/kategorier' },
-	{ name: 'Forfattere', link: '/forfattere' }
+	{ name: 'Forfattere', link: '/forfattere' },
+	{ name: 'Favoritter', link: '/favoritter' }
 ];
 export const DRAWER_LINKS = [
 	{ name: 'Forside', link: '/', icon: HomeIcon },
 	{ name: 'Alle sange', link: '/sange', icon: PlaylistIcon },
 	{ name: 'Kategorier', link: '/kategorier', icon: FormatListIcon },
 	{ name: 'Forfattere', link: '/forfattere', icon: PencilIcon },
+	{ name: 'Favoritter', link: '/favoritter' },
 	{ name: 'Om Spejderbogen', link: '/om-spejderbogen', icon: InfoIcon }
 ];
