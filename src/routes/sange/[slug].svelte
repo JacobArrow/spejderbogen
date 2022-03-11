@@ -48,7 +48,7 @@
 		<Song song={$song} />
 		{#if $songs}
 			<div
-				class="fixed xl:relative xl:flex xl:justify-center bottom-4 sm:bottom-10 xl:bottom-0 left-2/4 -translate-x-2/4 xl:col-span-full xl:mt-8"
+				class="fixed bottom-4 sm:bottom-10 left-2/4 -translate-x-2/4 xl:col-span-full"
 			>
 				<Pagination
 					on:clicked={pagination}
@@ -59,7 +59,7 @@
 					offset={0}
 				/>
 			</div>
-			<div class="mb-16 xl:mb-0" />
+			<div class="mb-16" />
 		{/if}
 	{:else}
 		<Card>

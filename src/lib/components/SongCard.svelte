@@ -18,7 +18,7 @@
 					<span class="line-clamp-1">{song.name}</span>
 				</h2>
 				<!-- TODO: add auto slow scroll -->
-				<p class="my-0 line-clamp-3">
+				<p class="card-body-text my-0 line-clamp-3">
 					{song.text}
 				</p>
 				<div class="card-actions flex items-center">
@@ -42,3 +42,9 @@
 		</a>
 	</Card>
 {/if}
+
+<style>
+	.card-body-text {
+		max-height: 88px;
+	}
+</style>
