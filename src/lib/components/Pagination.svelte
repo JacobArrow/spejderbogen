@@ -11,6 +11,7 @@
 	export let show = 1;
 	export let count = 0;
 	$: pages = Math.ceil(count / show);
+	$: setPagination(page);
 
 	function setPagination(selectedPage) {
 		const { from: f, to: t } = getPagination(selectedPage, show);
@@ -19,10 +20,6 @@
 		range = getPaginationRange(selectedPage, { min: min, total: pages, length: 5 });
 		dispatch('clicked', {page});
 	}
-
-	afterUpdate(() => {
-		setPagination(page);
-	});
 </script>
 
 {#if range.length > 1}
