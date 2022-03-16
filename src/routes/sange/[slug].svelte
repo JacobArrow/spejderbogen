@@ -48,7 +48,7 @@
 		<Song song={$song} />
 		{#if $songs}
 			<div
-				class="fixed bottom-4 sm:bottom-10 left-2/4 -translate-x-2/4 xl:col-span-full"
+				class="fixed bottom-16 left-2/4 -translate-x-2/4 xl:col-span-full"
 			>
 				<Pagination
 					on:clicked={pagination}

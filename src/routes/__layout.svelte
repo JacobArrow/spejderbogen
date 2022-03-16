@@ -2,6 +2,7 @@
 	import '../app.css';
 	import Navbar from '$components/Navbar.svelte';
 	import Drawer from '$components/Drawer.svelte';
+	import Footer from '$components/footer.svelte';
 	import { onMount } from 'svelte';
 	import { themeChange } from 'theme-change';
 	import { isOnline } from '$data/misc';
@@ -33,6 +34,13 @@
 			<slot />
 		</div>
 	</main>
+	<Footer />
 </Drawer>
 
 <svelte:window bind:online />
+
+<style lang="scss">
+	main {
+		height: calc(100vh - 46px - 64px);
+	}
+</style>
