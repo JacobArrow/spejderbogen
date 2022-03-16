@@ -4,7 +4,7 @@
 	const date = new Date();
 </script>
 
-<footer class="px-4 py-2 bg-primary text-neutral-content flex w-full">
+<footer class="px-4 py-2 bg-primary text-neutral-content flex w-full fixed bottom-0">
 	<p class="text-lg">
 		Design og udvikling af <strong><a href="https://youtech.dk" target="_blank">YouTech</a></strong>
     </p>

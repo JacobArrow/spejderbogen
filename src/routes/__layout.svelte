@@ -29,7 +29,7 @@
 
 <Drawer {title}>
 	<Navbar {title} />
-	<main class="prose p-4 max-w-none sm:p-10 overflow-x-hidden">
+	<main class="prose p-4 max-w-none sm:p-10 overflow-hidden">
 		<div class="container mx-auto scroll-smooth">
 			<slot />
 		</div>
@@ -38,9 +38,3 @@
 </Drawer>
 
 <svelte:window bind:online />
-
-<style lang="scss">
-	main {
-		height: calc(100vh - 46px - 64px);
-	}
-</style>
