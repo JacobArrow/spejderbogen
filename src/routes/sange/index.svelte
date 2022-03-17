@@ -23,14 +23,16 @@
 </svelte:head>
 
 <Header>Alle sange</Header>
-<CardGrid>
-	{#if $songs?.length}
-		<PaginatedList data={$songs} let:data={indexedData} page={0}>
-			<Card song={indexedData} />
-		</PaginatedList>
-	{:else}
-		{#each Array(9) as _, i}
-			<SongCard />
-		{/each}
-	{/if}
-</CardGrid>
+<div class="lg:-mb-9">
+	<CardGrid>
+		{#if $songs?.length}
+			<PaginatedList data={$songs} let:data={indexedData} page={0}>
+				<Card song={indexedData} />
+			</PaginatedList>
+		{:else}
+			{#each Array(9) as _, i}
+				<SongCard />
+			{/each}
+		{/if}
+	</CardGrid>
+</div>

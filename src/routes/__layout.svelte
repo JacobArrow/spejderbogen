@@ -7,6 +7,7 @@
 	import { isOnline } from '$data/misc';
 	import { DEFAULT_TITLE, VERCEL_ENV } from '$data/env';
 	import createLocalDatabase from '$data/db';
+	import Footer from '$components/Footer.svelte';
 
 	let online = false;
 	$: isOnline.set(online);
@@ -29,10 +30,20 @@
 <Drawer {title}>
 	<Navbar {title} />
 	<main class="prose p-4 max-w-none sm:p-10 overflow-x-hidden">
-		<div class="container mx-auto scroll-smooth">
+		<div class="container mx-auto">
 			<slot />
 		</div>
 	</main>
+	<Footer />
 </Drawer>
 
 <svelte:window bind:online />
+
+<style lang="scss">
+	main {
+		min-height: calc(100vh - 36px - 64px);
+		@media (min-width: 640px) {
+			min-height: calc(100vh - 44px - 64px);
+		}
+	}
+</style>

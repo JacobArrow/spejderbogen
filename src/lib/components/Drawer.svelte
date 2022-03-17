@@ -17,7 +17,7 @@
 		bind:checked={$drawer}
 		on:change={drawer.toggle}
 	/>
-	<div class="drawer-content overflow-y-scroll" id="drawer-content">
+	<div class="drawer-content overflow-y-scroll scroll-smooth" id="drawer-content">
 		<slot />
 	</div>
 	<div class="drawer-side">
