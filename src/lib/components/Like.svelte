@@ -8,12 +8,11 @@
 	import { db } from '$data/db';
 
 	export let songId;
-	const song = {id:songId};
+	$: song = {id:songId};
 	export let disabled = false;
 
 	$: liked = liveQuery(async () => {
 		const like = await db.likes.where('id').equals(songId).first();
-
 		return like;
 	});
 
