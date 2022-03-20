@@ -64,6 +64,7 @@ export default async function createLocalDatabase() {
 		if (songs && authors && categories && deleteDb) {
 			categories = addCategorySongCount(songs, categories);
 			authors = addAuthorSongCount(authors, songAuthors);
+			db.transaction("rw", db.songs, db.categories, db.authors, db.song_authors, async function() {
 			//Songs
 			// @ts-ignore
 			await db.songs
@@ -104,6 +105,12 @@ export default async function createLocalDatabase() {
 				.catch((err) => {
 					console.log('authors could not be loaded');
 				});
+			
+			}).catch(function (error) {
+				console.error(error);
+
+			});
+			
 		}
 		//TODO: Add error to frontend
 	}

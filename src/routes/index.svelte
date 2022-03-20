@@ -13,9 +13,22 @@
 	import CarouselItem from '$components/CarouselItem.svelte';
 
 	$: categories = liveQuery(async () => {
-		const categories = (
-			await db.categories.where('id').noneOf([1, 6, 8]).reverse().sortBy('views')
-		).slice(0, 5);
+		const categories = await db.categories
+			.where('id')
+			.noneOf([1, 6, 8])
+			.reverse()
+			.sortBy('views')
+			.then(async function (categories) {
+				categories = categories.slice(0, 5);
+				// const songs = await db.songs
+				// 	.orderBy('views')
+				// 	.reverse()
+				// 	.filter(song => categories.map(c => c.id).includes(song.categori_id))
+				// 	.limit(5*6)
+				// 	.toArray();
+				// console.log(songs);
+				return categories;
+			});
 		return categories;
 	});
 </script>
