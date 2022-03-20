@@ -31,20 +31,20 @@
 	{/each}
 {:else}
 	<div class="hidden md:block">
-		{#each Array(5) as _, i}
+		{#each Array(5) as _}
 			<SubHeader />
 			<CardGrid>
-				{#each Array(6) as _, i}
+				{#each Array(6) as _}
 					<SongCard />
 				{/each}
 			</CardGrid>
 		{/each}
 	</div>
 	<div class="block md:hidden">
-		{#each Array(5) as _, i}
+		{#each Array(5) as _}
 			<SubHeader />
 			<Carousel>
-				{#each Array(6) as _, i}
+				{#each Array(6) as _}
 					<CarouselItem>
 						<SongCard />
 					</CarouselItem>

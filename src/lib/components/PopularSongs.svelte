@@ -16,6 +16,7 @@
 		const songs = (
 			await db.songs.where('categori_id').equals(category.id).reverse().sortBy('views')
 		).slice(0, 6);
+
 		return songs;
 	});
 </script>
