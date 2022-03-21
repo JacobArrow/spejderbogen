@@ -20,13 +20,14 @@
 			.sortBy('views')
 			.then(async function (categories) {
 				categories = categories.slice(0, 5);
-				// const songs = await db.songs
-				// 	.orderBy('views')
-				// 	.reverse()
-				// 	.filter(song => categories.map(c => c.id).includes(song.categori_id))
-				// 	.limit(5*6)
-				// 	.toArray();
-				// console.log(songs);
+				for (let i = 0; i < categories.length; i++) {
+					categories[i].songs = await db.songs
+					.orderBy('views')
+					.filter((song) => song.categori_id == categories[i].id)
+					.reverse()
+					.limit(6)
+					.toArray();
+				};
 				return categories;
 			});
 		return categories;
@@ -38,7 +39,7 @@
 </svelte:head>
 
 <Header>Populære sange</Header>
-{#if $categories?.length}
+{#if $categories}
 	{#each $categories as category}
 		<PopularSongs {category} />
 	{/each}
