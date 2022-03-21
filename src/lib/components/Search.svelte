@@ -62,4 +62,9 @@
 			@apply text-neutral;
 		}
 	}
+	:global(html[data-theme='dark']) {
+		& .search input {
+			@apply border-base-100;
+		}
+	}
 </style>

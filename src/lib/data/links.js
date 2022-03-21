@@ -20,5 +20,5 @@ export const DRAWER_LINKS = [
 	{ name: 'Kategorier', link: '/kategorier', icon: FormatListIcon },
 	{ name: 'Forfattere', link: '/forfattere', icon: PencilIcon },
 	{ name: 'Favoritter', link: '/favoritter', icon: HeartIcon },
-	{ name: 'Om Spejderbogen', link: '/om-spejderbogen', icon: InfoIcon }
+	// { name: 'Om Spejderbogen', link: '/om-spejderbogen', icon: InfoIcon }
 ];

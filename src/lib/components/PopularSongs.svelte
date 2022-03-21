@@ -1,65 +1,28 @@
 <script>
-	//Data
-	import { liveQuery } from 'dexie';
-	import { db } from '$data/db';
+	//Components
 	import CardGrid from './CardGrid.svelte';
 	import Card from './SongCard.svelte';
 	import Carousel from './Carousel.svelte';
 	import CarouselItem from './CarouselItem.svelte';
 	import SubHeader from './SubHeader.svelte';
-	import SkeletonSubHeader from './Skeleton/SubHeader.svelte';
-	import SongCard from './Skeleton/SongCard.svelte';
 
 	export let category;
-
-	$: songs = liveQuery(async () => {
-		const songs = (
-			await db.songs.where('categori_id').equals(category.id).reverse().sortBy('views')
-		).slice(0, 6);
-
-		return songs;
-	});
 </script>
 
-{#if $songs?.length}
 <SubHeader center={false}>Kategori: {category.name}</SubHeader>
-	<div class="hidden md:block">
-		<CardGrid>
-			{#each $songs as song (song.id)}
-				<Card {song} />
-			{/each}
-		</CardGrid>
-	</div>
-	<div class="block md:hidden">
-		<Carousel>
-			{#each $songs as song (song.id)}
-				<CarouselItem>
-					<Card {song} />
-				</CarouselItem>
-			{/each}
-		</Carousel>
-	</div>
-{:else}
-	<div class="hidden md:block">
-		{#each Array(5) as _, i}
-		<SkeletonSubHeader />
-		<CardGrid>
-			{#each Array(6) as _, i}
-				<SongCard />
-			{/each}
-		</CardGrid>
-	{/each}
-	</div>
-	<div class="block md:hidden">
-		{#each Array(5) as _, i}
-		<SkeletonSubHeader />
-		<Carousel>
-			{#each Array(6) as _, i}
+<div class="hidden md:block">
+	<CardGrid>
+		{#each category.songs as song (song.id)}
+			<Card {song} />
+		{/each}
+	</CardGrid>
+</div>
+<div class="block md:hidden">
+	<Carousel>
+		{#each category.songs as song (song.id)}
 			<CarouselItem>
-				<SongCard />
+				<Card {song} />
 			</CarouselItem>
-			{/each}
-		</Carousel>
-	{/each}
-	</div>
-{/if}
+		{/each}
+	</Carousel>
+</div>
