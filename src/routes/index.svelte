@@ -39,7 +39,7 @@
 </svelte:head>
 
 <Header>Populære sange</Header>
-{#if $categories}
+{#if $categories?.length}
 	{#each $categories as category}
 		<PopularSongs {category} />
 	{/each}
