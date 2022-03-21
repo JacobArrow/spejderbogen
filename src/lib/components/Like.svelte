@@ -34,6 +34,7 @@
 	on:click|preventDefault={handleClick}
 	class="btn btn-square btn-ghost stroke-current m-0 ml-auto"
 	class:$liked
+	name="like"
 >
 <div class="swap" class:text-error={$liked} class:swap-active={$liked}>
 	<div class="swap-on"><HeartIcon size="24px" /></div>

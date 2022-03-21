@@ -25,7 +25,7 @@
 		<div class="menu overflow-y-auto w-72 bg-base-100">
 			<div class="navbar shadow-lg bg-neutral text-neutral-content flex w-full justify-center">
 				<div class="navbar-start">
-					<button class="btn btn-square btn-ghost stroke-current" on:click={drawer.toggle}
+					<button class="btn btn-square btn-ghost stroke-current" name="close" on:click={drawer.toggle}
 						><CloseIcon size="24px" /></button
 					>
 				</div>
