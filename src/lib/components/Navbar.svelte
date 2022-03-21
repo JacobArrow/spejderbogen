@@ -19,7 +19,7 @@
 	class="navbar shadow-lg bg-neutral text-neutral-content flex inset-x-0 sticky top-0 w-full z-50"
 >
 	<div class="flex-none xl:hidden sm:flex">
-		<button class="btn btn-square btn-ghost stroke-current" name="menu" on:click={drawer.toggle}>
+		<button class="btn btn-square btn-ghost stroke-current" aria-label="menu" on:click={drawer.toggle}>
 			<MenuIcon size="24px" />
 		</button>
 	</div>
@@ -45,7 +45,7 @@
 			class="theme-toggle btn btn-square btn-ghost sun"
 			data-set-theme="light"
 			data-act-class="active"
-			name="light theme"
+			aria-label="light theme"
 		>
 			<SunIcon size="24px" />
 		</button>
@@ -53,7 +53,7 @@
 			class="theme-toggle btn btn-square btn-ghost moon"
 			data-set-theme="dark"
 			data-act-class="active"
-			name="dark theme"
+			aria-label="dark theme"
 		>
 			<MoonIcon size="24px" />
 		</button>
