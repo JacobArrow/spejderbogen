@@ -34,7 +34,7 @@
 
 <style lang="scss">
 	.search-results {
-		max-height: 90vh;
+		max-height: 80vh;
 		@media (min-width: 640px) {
 			& > div {
 				/* width */
