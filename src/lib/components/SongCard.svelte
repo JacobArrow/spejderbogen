@@ -1,6 +1,7 @@
 <script>
 	//Functions
 	import { encode } from '$functions/convertUrl';
+import AddToList from './AddToList.svelte';
 
 	//Components
 	import Card from './Card.svelte';

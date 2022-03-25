@@ -9,7 +9,8 @@ db.version(1).stores({
 	song_authors: 'id, song_id, author_id',
 	categories: 'id, name, songCount, views',
 	songs: 'id, number, name, text, melody, categori_id, views',
-	likes: '&id'
+	likes: '&id',
+	lists: 'id, ids'
 });
 
 async function getData(path) {

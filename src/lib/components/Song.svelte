@@ -5,6 +5,7 @@
 
 	//Functions
 	import { encode } from '$functions/convertUrl';
+	import AddToList from './AddToList.svelte';
 
 	export let song;
 </script>
@@ -36,7 +37,10 @@
 						><div class="badge badge-ghost">{author.name}</div></a
 					>
 				{/each}
-				<Like songId={song.id} />
+				<div class="flex ml-auto">
+					<AddToList />
+					<Like songId={song.id} />
+				</div>
 			</div>
 		</div>
 	</Card>
