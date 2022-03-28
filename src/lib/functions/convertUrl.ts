@@ -2,8 +2,8 @@ const rules = {
 	å: 'aa',
 	ø: 'oe',
 	æ: 'ae',
-	'-': ' ',
-	' ': '-'
+	'_': ' ',
+	' ': '_'
 };
 
 function swap(obj) {
