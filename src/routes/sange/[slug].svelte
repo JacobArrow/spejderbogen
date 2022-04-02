@@ -40,6 +40,7 @@
 </script>
 
 <svelte:head>
+	<meta name="robots" content="noindex nofollow" />
 	<title>{DEFAULT_TITLE} - {slug.charAt(0).toUpperCase() + slug.slice(1)}</title>
 </svelte:head>
 

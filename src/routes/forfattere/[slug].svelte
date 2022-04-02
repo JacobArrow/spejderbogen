@@ -29,6 +29,7 @@
 </script>
 
 <svelte:head>
+	<meta name="robots" content="noindex nofollow" />
 	<title>{DEFAULT_TITLE} - Sange</title>
 </svelte:head>
 
