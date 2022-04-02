@@ -40,9 +40,7 @@
 </script>
 
 <svelte:head>
-	{#if $song}
-		<title>{DEFAULT_TITLE} - {$song.name}</title>
-	{/if}
+	<title>{DEFAULT_TITLE} - {slug.charAt(0).toUpperCase() + slug.slice(1)}</title>
 </svelte:head>
 
 <div class="mx-auto max-w-2xl">
