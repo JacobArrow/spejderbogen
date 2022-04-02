@@ -40,7 +40,9 @@
 </script>
 
 <svelte:head>
-	<title>{DEFAULT_TITLE} - {$song?.name || ""}</title>
+	{#if $song}
+		<title>{DEFAULT_TITLE} - {$song.name}</title>
+	{/if}
 </svelte:head>
 
 <div class="mx-auto max-w-2xl">
