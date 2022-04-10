@@ -38,7 +38,7 @@
 					>
 				{/each}
 				<div class="flex ml-auto">
-					<AddToList />
+					<AddToList songId={song.id} />
 					<Like songId={song.id} />
 				</div>
 			</div>

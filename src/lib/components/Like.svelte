@@ -12,8 +12,7 @@
 	export let disabled = false;
 
 	$: liked = liveQuery(async () => {
-		const like = await db.likes.where('id').equals(songId).first();
-		return like;
+		return await db.likes.where('id').equals(songId).first();
 	});
 
 	async function like() {
