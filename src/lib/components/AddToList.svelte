@@ -28,14 +28,16 @@
 	});
 
 	async function createList(name) {
-		name.length ? name.charAt(0).toUpperCase() + name.slice(1) : name = `Liste ${$lists.length+1}`;
+		name.length
+			? name.charAt(0).toUpperCase() + name.slice(1)
+			: (name = `Liste ${$lists.length + 1}`);
 		await db.lists.add({ name: name, ids: [] });
 		listName = '';
 		newList = false;
 	}
 
 	function checkForDuplicate(list, songId) {
-		if(list.ids.includes(songId)) {
+		if (list.ids.includes(songId)) {
 			selectedList = list;
 			duplicate = true;
 		} else {
@@ -99,7 +101,11 @@
 						placeholder="Listenavn"
 						class="input input-ghost input-sm outline-0 w-full"
 					/>
-					<button class="btn btn-sm bg-primary btn-square" aria-label="create" on:click={() => createList(listName)}>
+					<button
+						class="btn btn-sm bg-primary btn-square"
+						aria-label="create"
+						on:click={() => createList(listName)}
+					>
 						<PlusIcon size="20px" />
 					</button>
 				</div>
@@ -111,7 +117,15 @@
 	{/if}
 </div>
 
-<Modal open={duplicate} title="Sangen er tilføjet i forvejen" text="Er du sikker på at du stadig vil tilføje den?" on:yes={() => addSongToList(selectedList, songId)} on:no={() => duplicate = false}/>
+{#if duplicate}
+	<Modal
+		bind:open={duplicate}
+		title="Sangen er tilføjet i forvejen"
+		text="Er du sikker på at du stadig vil tilføje den?"
+		on:yes={() => addSongToList(selectedList, songId)}
+		on:no={() => (duplicate = false)}
+	/>
+{/if}
 
 <style lang="scss">
 	.btn-disabled,

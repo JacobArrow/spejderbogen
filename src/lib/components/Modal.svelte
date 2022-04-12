@@ -14,7 +14,12 @@
 	const no = () => dispatch('no');
 </script>
 
-<div transition:fade={{ duration: 150 }} class:modal-open={open} class="modal">
+<div
+	transition:fade={{ duration: 150 }}
+	on:click|self={() => (open = false)}
+	class:modal-open={open}
+	class="modal"
+>
 	<div class="modal-box">
 		<h3 class="font-bold text-lg mt-0">{title}</h3>
 		<p class="p-0">{text}</p>
