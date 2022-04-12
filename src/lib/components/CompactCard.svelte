@@ -20,6 +20,7 @@
 					<div class="badge justify-self-end badge-primary whitespace-nowrap">{badgeContent}</div>
 				{/if}
 			</h2>
+			<slot />
 		</div>
 	</a>
 </Card>

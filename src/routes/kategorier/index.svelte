@@ -4,12 +4,12 @@
 	import CardGrid from '$components/CardGrid.svelte';
 	import Card from '$components/CompactCard.svelte';
 	import Header from '$components/Header.svelte';
+	import CompactCard from '$components/Skeleton/CompactCard.svelte';
 
 	//Data
 	import { liveQuery } from 'dexie';
 	import { db } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
-	import CompactCard from '$components/Skeleton/CompactCard.svelte';
 
 	$: categories = liveQuery(async () => {
 		const categories = await db.categories.toArray();
