@@ -3,6 +3,7 @@
 	import { page } from '$app/stores';
 	import { decode, encode } from '$functions/convertUrl';
 	import { goto } from '$app/navigation';
+	import { beforeUpdate } from 'svelte';
 	import { incrementCategory, incrementSong } from '$functions/increment';
 
 	//Components

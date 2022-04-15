@@ -25,8 +25,12 @@
 		return await db.lists.toArray();
 	});
 
+	async function deleteList(listId) {
+		await db.lists.delete(listId);
+	}
+
 	function createList() {
-		db.lists.add({ id: uuidv4() });
+		//db.lists.add({ id: uuidv4() });
 	}
 
 	function shareList() {
@@ -44,15 +48,16 @@
 {#if $lists?.length}
 	<div class="max-w-4xl mx-auto">
 		<CardGrid xlCols={2}>
-			<PaginatedList data={$lists} let:data={indexedData} page={0} show={16}>
+			<PaginatedList data={$lists} let:data={list} page={0} show={16}>
 				<Card
-					subPath={'kategorier'}
-					path={indexedData.name}
-					content={indexedData.name}
-					badgeContent={`${indexedData.ids.length} sange`}
+					subPath={'lister'}
+					path={`${list.id}`}
+					content={list.name}
+					badgeContent={`${list.ids.length} sange`}
 				>
 					<button
 						class="btn btn-circle btn-xs btn-error text-primary-content h-7 w-7 absolute -top-2 -right-2"
+						on:click|preventDefault={() => deleteList(list.id)}
 					>
 						<TrashIcon size="18px" />
 					</button>
