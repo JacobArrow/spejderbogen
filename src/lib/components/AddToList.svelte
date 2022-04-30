@@ -117,6 +117,7 @@
 	{/if}
 </div>
 
+{#if duplicate}
 	<Modal
 		bind:open={duplicate}
 		title="Sangen er tilføjet i forvejen"
@@ -124,6 +125,7 @@
 		on:yes={() => addSongToList(selectedList, songId)}
 		on:no={() => (duplicate = false)}
 	/>
+{/if}
 
 <style lang="scss">
 	.btn-disabled,
