@@ -41,11 +41,9 @@
 
 <style lang="scss">
 	main {
-	min-height: calc(100vh - 36px - 64px);
-	}
-	@media (min-width: 640px) {
-	main {
-		min-height: calc(100vh - 44px - 64px);
-	}
+		min-height: calc(100vh - 36px - 64px);
+		@media (min-width: 640px) {
+			min-height: calc(100vh - 44px - 64px);
+		}
 }
 </style>
