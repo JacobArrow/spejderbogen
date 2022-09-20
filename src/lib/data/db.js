@@ -64,10 +64,10 @@ function deleteDb() {
 
 export default async function createLocalDatabase() {
 	if (isOnline) {
-		const songs = await getData('/api/songs.json');
-		const songAuthors = await getData('/api/song-author.json');
-		let authors = await getData('/api/authors.json');
-		let categories = await getData('/api/categories.json');
+		const songs = await getData('/api/songs');
+		const songAuthors = await getData('/api/song-author');
+		let authors = await getData('/api/authors');
+		let categories = await getData('/api/categories');
 		if (songs && authors && categories && deleteDb) {
 			categories = addCategorySongCount(songs, categories);
 			authors = addAuthorSongCount(authors, songAuthors);

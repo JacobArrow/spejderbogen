@@ -7,11 +7,11 @@ export async function getSongs(request) {
 	authors (id, name), categori_id, melody
 `);
 	if (error) console.log('error', error);
-
+	
 	if (
 		status === 200 &&
-		request.request.method !== 'GET' &&
-		request.request.headers.accept !== 'application/json'
+		request.method !== 'GET' &&
+		request.headers.accept !== 'application/json'
 	) {
 		return {
 			status: 303,
@@ -28,7 +28,7 @@ export async function getSongs(request) {
 }
 
 export async function incrementViews(request) {
-	if (request.request.method !== 'POST' && request.request.headers.accept !== 'application/json') {
+	if (request.method !== 'POST' && request.headers.accept !== 'application/json') {
 		return {
 			status: 303,
 			headers: {
@@ -36,7 +36,7 @@ export async function incrementViews(request) {
 			}
 		};
 	}
-	const data = await request.request.json();
+	const data = await request.json();
 	const { error, status } = await supabase.rpc('increment_song_views', {
 		songid: data.songid
 	});
