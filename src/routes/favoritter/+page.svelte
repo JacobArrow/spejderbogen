@@ -17,7 +17,6 @@
 
 	$: songs = liveQuery(async () => {
 		if ($likes) {
-			console.log($likes);
 			return await db.songs
 				.where('id')
 				.anyOf($likes.map(({ id }) => id))

@@ -45,5 +45,5 @@
 		@media (min-width: 640px) {
 			min-height: calc(100vh - 44px - 64px);
 		}
-	}
+}
 </style>

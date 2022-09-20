@@ -1,6 +1,6 @@
 import supabase from '$data/_db.js';
 
-export async function api(request) {
+export async function getCategories(request) {
 	const { data, error, status } = await supabase.from('categories').select(`
 	id, name, views
 `);
@@ -8,7 +8,7 @@ export async function api(request) {
 
 	if (
 		status === 200 &&
-		request.request.method !== 'GET' &&
+		request.method !== 'GET' &&
 		request.headers.accept !== 'application/json'
 	) {
 		return {
@@ -26,7 +26,7 @@ export async function api(request) {
 }
 
 export async function incrementViews(request) {
-	if (request.request.method !== 'POST' && request.request.headers.accept !== 'application/json') {
+	if (request.method !== 'POST' && request.headers.accept !== 'application/json') {
 		return {
 			status: 303,
 			headers: {
@@ -34,7 +34,7 @@ export async function incrementViews(request) {
 			}
 		};
 	}
-	const data = await request.request.json();
+	const data = await request.json();
 	const { error, status } = await supabase.rpc('increment_category_views', {
 		categoryid: data.categoryid
 	});

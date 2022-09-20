@@ -1,6 +1,6 @@
 import supabase from '$data/_db.js';
 
-export async function api(request) {
+export async function getSongAuthor(request) {
 	const { data, error, status } = await supabase.from('song_author').select(`
 	id, song_id, author_id
 `);
@@ -8,7 +8,7 @@ export async function api(request) {
 
 	if (
 		status === 200 &&
-		request.request.method !== 'GET' &&
+		request.method !== 'GET' &&
 		request.headers.accept !== 'application/json'
 	) {
 		return {
