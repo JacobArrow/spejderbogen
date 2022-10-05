@@ -1,3 +1,4 @@
+import { INCREMENT_VIEW } from '$data/env';
 const songPrefix = 'song-';
 const categoryPrefix = 'category-';
 
@@ -14,7 +15,7 @@ function getDate() {
 }
 
 export const incrementSong = async (songid: number) => {
-	if (getLastDate(songid, songPrefix) != getDate())
+	if (getLastDate(songid, songPrefix) != getDate() && INCREMENT_VIEW) {
 		await self.fetch('/api/songs/increment', {
 			method: 'POST',
 			headers: {
@@ -23,10 +24,11 @@ export const incrementSong = async (songid: number) => {
 			body: JSON.stringify({ songid: songid })
 		});
 	setLastDate(songid, songPrefix);
+	}
 };
 
 export const incrementCategory = async (categoryid: number) => {
-	if (getLastDate(categoryid, categoryPrefix) != getDate())
+	if (getLastDate(categoryid, categoryPrefix) != getDate() && INCREMENT_VIEW) {
 		await self.fetch('/api/categories/increment', {
 			method: 'POST',
 			headers: {
@@ -35,4 +37,5 @@ export const incrementCategory = async (categoryid: number) => {
 			body: JSON.stringify({ categoryid: categoryid })
 		});
 	setLastDate(categoryid, categoryPrefix);
+	}
 };

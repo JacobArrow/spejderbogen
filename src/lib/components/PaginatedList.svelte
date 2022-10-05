@@ -39,4 +39,3 @@
 >
 	<Pagination on:clicked={pagination} count={data.length} bind:from bind:to bind:page {show} />
 </div>
-<div class="mb-10 sm:mb-0" />

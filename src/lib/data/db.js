@@ -4,6 +4,7 @@ import { isOnline } from './misc';
 const doDeleteDb = false;
 
 export const db = new Dexie('localSongs');
+
 db.version(1).stores({
 	authors: 'id, name, songCount',
 	song_authors: 'id, song_id, author_id',
@@ -11,12 +12,22 @@ db.version(1).stores({
 	songs: 'id, number, name, text, melody, categori_id, views',
 	likes: '&id'
 });
+
 db.version(2).stores({
 	authors: 'id, name, songCount',
 	song_authors: 'id, song_id, author_id',
 	categories: 'id, name, songCount, views',
 	songs: 'id, number, name, text, melody, categori_id, views',
 	likes: '&id'
+});
+
+db.version(3).stores({
+	authors: 'id, name, songCount',
+	song_authors: 'id, song_id, author_id',
+	categories: 'id, name, songCount, views',
+	songs: 'id, number, name, text, melody, categori_id, views',
+	likes: '&id',
+	lists: '++id, name'
 });
 
 async function getData(path) {
