@@ -6,12 +6,14 @@ import PlaylistIcon from 'svelte-material-icons/PlaylistMusic.svelte';
 import FormatListIcon from 'svelte-material-icons/FormatListBulletedSquare.svelte';
 import InfoIcon from 'svelte-material-icons/InformationOutline.svelte';
 import HeartIcon from 'svelte-material-icons/Heart.svelte';
+import PlaylistPlusIcon from 'svelte-material-icons/PlaylistPlus.svelte';
 
 export const NAVBAR_LINKS = [
 	{ name: 'Forside', link: '/' },
 	{ name: 'Alle sange', link: '/sange' },
 	{ name: 'Kategorier', link: '/kategorier' },
 	{ name: 'Forfattere', link: '/forfattere' },
+	{ name: 'Lister', link: '/lister' },
 	{ name: 'Favoritter', link: '/favoritter' }
 ];
 export const DRAWER_LINKS = [
@@ -19,6 +21,8 @@ export const DRAWER_LINKS = [
 	{ name: 'Alle sange', link: '/sange', icon: PlaylistIcon },
 	{ name: 'Kategorier', link: '/kategorier', icon: FormatListIcon },
 	{ name: 'Forfattere', link: '/forfattere', icon: PencilIcon },
+	{ name: 'Lister', link: '/lister', icon: PlaylistPlusIcon },
 	{ name: 'Favoritter', link: '/favoritter', icon: HeartIcon },
 	// { name: 'Om Spejderbogen', link: '/om-spejderbogen', icon: InfoIcon }
 ];
+	

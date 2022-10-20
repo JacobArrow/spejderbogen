@@ -27,6 +27,7 @@
 	import { scrollPosition } from '$lib/data/misc';
 
 	$: isTablet = $scrollPosition.clientWidth < 768;
+	$: iconSize = isTablet ? '25' : '30';
 
 	const slug = decode($page.params.slug);
 	let edit = false;
@@ -69,10 +70,10 @@
 
 {#if $data}
 	<Header>
-		{#if edit}
+		<div class="swap" class:swap-active={edit}>
 		<!-- TODO: Add smooth transition -->
 		<!-- https://svelte.dev/repl/f4e83b7f544646cbae7f69728b615caa?version=3.31.0 -->
-			<div class="w-fit m-auto relative">
+			<div class="w-fit m-auto relative swap-on">
 				<textarea
 					bind:value={listName}
 					use:autosize
@@ -88,8 +89,8 @@
 					<SaveIcon size="26px" />
 				</button>
 			</div>
-		{:else}
-			<span class="max-w-2xl block leading-none m-auto py-3">
+		
+			<span class="max-w-2xl block leading-none m-auto py-3 swap-off">
 				{listName}
 				<button
 					class="btn btn-circle btn-sm btn-primary align-bottom absolute m-2"
@@ -98,10 +99,10 @@
 					<PenIcon size="20px" />
 				</button></span
 			>
-		{/if}
+		</div>
 	</Header>
 	{#if $data.songs.length}
-		<div class="m-auto flex flex-col gap-4">
+		<div class="m-auto flex flex-col gap-4 mb-14 md:mb-6">
 			{#each $data.songs as song, index}
 				<div
 					class="flex items-center justify-center gap-4 -ml-5 sm:-ml-10 lg:-ml-14 gap-x-0 sm:gap-x-2 relative"
@@ -126,23 +127,23 @@
 		<p class="text-center">Listen er tom - Find en sang for at tilføje den</p>
 	{/if}
 	<Fab>
-		<div class="flex flex-row md:flex-col justify-center md:gap-2 max-sm:btn-group">
-			<button class="btn btn-circle md:btn-outline btn-lg btn-primary"><ShareIcon size="30" /></button>
+		<div class="flex flex-row md:flex-col justify-center md:gap-2 max-md:btn-group">
+			<button class="btn btn-circle md:btn-outline md:btn-lg btn-primary max-md:w-16"><ShareIcon size="{iconSize}" /></button>
 			<button
-				class="btn btn-circle btn-lg md:btn-outline btn-secondary swap swap-rotate"
+				class="btn btn-circle md:btn-lg md:btn-outline max-md:btn-primary btn-secondary swap swap-rotate max-md:w-16"
 				class:swap-active={edit}
 				on:click={() => (edit = !edit)}
 			>
 				<span class="swap-on">
-					<SaveIcon size="30" />
+					<SaveIcon size="{iconSize}" />
 				</span>
 				<span class="swap-off">
-					<PenIcon size="30" />
+					<PenIcon size="{iconSize}" />
 				</span>
 			</button>
 			<button
-				class="btn btn-circle btn-lg md:btn-outline btn-error"
-				on:click={() => (checkDelete = !checkDelete)}><DeleteIcon size="30" /></button
+				class="btn btn-circle md:btn-lg max-md:btn-primary md:btn-outline btn-error max-md:w-16"
+				on:click={() => (checkDelete = !checkDelete)}><DeleteIcon size="{iconSize}" /></button
 			>
 		</div>
 	</Fab>

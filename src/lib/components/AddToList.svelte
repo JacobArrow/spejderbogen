@@ -98,7 +98,7 @@
 				<p class="m-0">{newList ? 'Opret ny liste' : 'Du har ingen lister'}</p>
 			{/if}
 			{#if newList}
-				<div class="input-group">
+				<div class="input-group px-2">
 					<input
 						bind:value={listName}
 						on:keypress={(event) => (event.key == 'Enter' ? createList(listName) : '')}
