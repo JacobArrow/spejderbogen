@@ -14,23 +14,25 @@
 	const no = () => dispatch('no');
 </script>
 
-<div
-	transition:fade={{ duration: 150 }}
-	on:click|self={() => (open = false)}
-	class:modal-open={open}
-	class="modal"
->
-	<div class="modal-box">
-		<h3 class="font-bold text-lg mt-0">{title}</h3>
-		<p class="p-0">{text}</p>
-		<slot />
-		<div class="modal-action">
-			{#if accept.length}
-				<button on:click={yes} class="btn btn-primary">{accept}</button>
-			{/if}
-			{#if deny.length}
-				<button on:click={no} class="btn btn-primary btn-outline">{deny}</button>
-			{/if}
+{#if open}
+	<div
+		transition:fade={{ duration: 150 }}
+		on:click|self={() => (open = false)}
+		class:modal-open={open}
+		class="modal"
+	>
+		<div class="modal-box">
+			<h3 class="font-bold text-lg mt-0">{title}</h3>
+			<p class="p-0">{text}</p>
+			<slot />
+			<div class="modal-action">
+				{#if accept.length}
+					<button on:click={yes} class="btn btn-primary">{accept}</button>
+				{/if}
+				{#if deny.length}
+					<button on:click={no} class="btn btn-primary btn-outline">{deny}</button>
+				{/if}
+			</div>
 		</div>
 	</div>
-</div>
+{/if}

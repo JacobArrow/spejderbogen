@@ -6,6 +6,7 @@
 	import PlaylistPlusIcon from 'svelte-material-icons/PlaylistPlus.svelte';
 	import PlusIcon from 'svelte-material-icons/Plus.svelte';
 	import CloseIcon from 'svelte-material-icons/Close.svelte';
+	import PenIcon from 'svelte-material-icons/Pen.svelte';
 
 	//Data
 	import { liveQuery } from 'dexie';
@@ -67,7 +68,7 @@
 		<div
 			transition:fade={{ duration: 150 }}
 			use:clickOutside={() => (showMenu = false)}
-			class="card card-compact w-64 p-4 shadow bg-neutral text-primary-content text-center flex gap-2 bottom-full top-auto right-0 absolute"
+			class="card card-compact w-64 py-4 shadow bg-neutral text-primary-content text-center flex gap-2 bottom-full top-auto right-0 absolute"
 		>
 			<button
 				on:click={() => (showMenu = false)}
@@ -78,14 +79,18 @@
 			</button>
 			{#if $lists.length}
 				<p class="m-0">{newList ? 'Opret ny liste' : 'Tilføj sangen til en liste'}</p>
-				<ul class="p-0 not-prose list-none">
+				<ul class="p-0 m-2 ml-8 not-prose list-none">
 					{#each $lists as list}
-						<li class="p-0">
+						<li class="p-0 flex items-center gap-1">
 							<button
 								on:click={() => checkForDuplicate(list, songId)}
-								class="btn btn-ghost btn-sm text-current w-full h-fit"
+								class="btn btn-ghost btn-sm text-current h-fit flex-shrink grow basis-auto"
 								>{list.name}<span class="ml-1">({list.ids.length})</span>
 							</button>
+                            <a href="/lister/{list.id}"
+                            class="p-1 btn btn-ghost btn-square btn-sm text-current w-fit h-fit">
+                                <PenIcon size="20px" />
+                            </a>
 						</li>
 					{/each}
 				</ul>
@@ -117,15 +122,13 @@
 	{/if}
 </div>
 
-{#if duplicate}
-	<Modal
-		bind:open={duplicate}
-		title="Sangen er tilføjet i forvejen"
-		text="Er du sikker på at du stadig vil tilføje den?"
-		on:yes={() => addSongToList(selectedList, songId)}
-		on:no={() => (duplicate = false)}
-	/>
-{/if}
+<Modal
+	bind:open={duplicate}
+	title="Sangen er tilføjet i forvejen"
+	text="Er du sikker på at du stadig vil tilføje den?"
+	on:yes={() => addSongToList(selectedList, songId)}
+	on:no={() => (duplicate = false)}
+/>
 
 <style lang="scss">
 	.btn-disabled,

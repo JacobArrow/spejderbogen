@@ -37,7 +37,7 @@
 >
 	<div class="swap" class:text-error={$liked} class:swap-active={$liked}>
 		<div class="swap-on"><HeartIcon size="24px" /></div>
-		<div class="swap-iff"><HeartOutlineIcon size="24px" /></div>
+		<div class="swap-off"><HeartOutlineIcon size="24px" /></div>
 	</div>
 </button>
 

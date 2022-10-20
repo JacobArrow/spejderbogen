@@ -1,4 +1,4 @@
-<footer class="px-4 py-2 bg-primary text-neutral-content flex w-full justify-items-center">
+<footer id="footer" class="px-4 py-2 bg-primary text-neutral-content flex w-full justify-items-center">
 	<p class="text-sm sm:text-lg">
 		Design og udvikling af <strong><a href="https://youtech.dk" rel="external" target="_blank">YouTech</a></strong>
     </p>

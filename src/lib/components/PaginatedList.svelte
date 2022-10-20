@@ -1,7 +1,7 @@
 <script>
 	import Pagination from '$components/Pagination.svelte';
 	import { setParam, getParam } from '$functions/urlParams';
-	import { beforeUpdate, afterUpdate, onMount } from 'svelte';
+	import { afterUpdate, onMount } from 'svelte';
 
 	let from;
 	let to;
@@ -21,7 +21,6 @@
 		if (param) page = parseInt(param);
 	});
 
-	beforeUpdate(() => {});
 	afterUpdate(() => {
 		if (y) drawerContent.scrollTo(0, y);
 		y = null;
@@ -31,7 +30,7 @@
 	});
 </script>
 
-{#each sliced as data (data.id)}
+{#each sliced as data, i (i)}
 	<slot {data} />
 {/each}
 <div

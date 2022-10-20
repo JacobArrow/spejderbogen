@@ -56,7 +56,7 @@
 					badgeContent={`${list.ids.length} sange`}
 				>
 					<button
-						class="btn btn-circle btn-xs btn-error text-primary-content h-7 w-7 absolute -top-2 -right-2"
+						class="btn btn-circle btn-xs btn-error h-7 w-7 absolute -top-2 -right-2"
 						on:click|preventDefault={() => deleteList(list.id)}
 					>
 						<TrashIcon size="18px" />

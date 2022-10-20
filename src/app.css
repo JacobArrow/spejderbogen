@@ -4,5 +4,15 @@
 @tailwind utilities;
 
 .card-actions {
-    row-gap: initial;
+	row-gap: initial;
+}
+
+@layer components {
+    .btn-primary {
+        @apply text-primary-content;
+    }
+	.btn-error {
+		@apply hover:bg-error-focus;
+		@apply hover:border-error-focus;
+	}
 }
