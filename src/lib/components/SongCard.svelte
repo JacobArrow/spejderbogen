@@ -59,7 +59,7 @@
 		{#if action}
 			<button
 				on:click={() => dispatch('action', song)}
-				transition:scale={{ duration: 300, easing: quintIn }}
+				transition:scale={{ duration: 200, easing: quintIn }}
 				class="btn btn-circle btn-sm btn-error p-1 w-fit h-fit align-bottom absolute -top-3 -right-3 {actionClass}"
 			>
 				<svelte:component this={actionIcon || DeleteIcon} size="24px" />

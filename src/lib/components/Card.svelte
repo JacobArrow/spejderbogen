@@ -2,7 +2,7 @@
 	export let hover = true;
 </script>
 
-<div class:hover class="card shadow-md overflow-visible w-full bg-primary-content">
+<div class:hover class="card shadow-md overflow-visible w-full">
 	<slot />
 </div>
 
