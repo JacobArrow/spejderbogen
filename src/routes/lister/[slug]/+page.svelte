@@ -22,9 +22,10 @@
 	import { decode } from '$functions/convertUrl';
 	import autosize from 'svelte-autosize';
 	import { goto } from '$app/navigation';
-	
+
 	//Misc
 	import { scrollPosition } from '$lib/data/misc';
+	import Draggable from '$lib/components/Draggable.svelte';
 
 	$: isTablet = $scrollPosition.clientWidth < 768;
 	$: iconSize = isTablet ? '25' : '30';
@@ -33,11 +34,13 @@
 	let edit = false;
 	let checkDelete = false;
 	let listName;
+	let listSongs = [];
 
 	$: data = liveQuery(async () => {
 		const list = await db.lists.where('id').equals(parseInt(slug)).first();
 		const songs = await db.songs.bulkGet(list.ids);
 		listName = list.name;
+		listSongs = songs;
 		return { songs, list };
 	});
 
@@ -61,6 +64,10 @@
 			ids
 		});
 	}
+
+	function getSongIndex(song) {
+		return listSongs.indexOf(song);
+	}
 </script>
 
 <svelte:head>
@@ -71,8 +78,8 @@
 {#if $data}
 	<Header>
 		<div class="swap" class:swap-active={edit}>
-		<!-- TODO: Add smooth transition -->
-		<!-- https://svelte.dev/repl/f4e83b7f544646cbae7f69728b615caa?version=3.31.0 -->
+			<!-- TODO: Add smooth transition -->
+			<!-- https://svelte.dev/repl/f4e83b7f544646cbae7f69728b615caa?version=3.31.0 -->
 			<div class="w-fit m-auto relative swap-on">
 				<textarea
 					bind:value={listName}
@@ -89,7 +96,7 @@
 					<SaveIcon size="26px" />
 				</button>
 			</div>
-		
+
 			<span class="max-w-2xl block leading-none m-auto py-3 swap-off">
 				{listName}
 				<button
@@ -101,16 +108,16 @@
 			>
 		</div>
 	</Header>
-	{#if $data.songs.length}
+	{#if listSongs.length}
 		<div class="m-auto flex flex-col gap-4 mb-14 md:mb-6">
-			{#each $data.songs as song, index}
+			<Draggable bind:items={listSongs} let:prop={song}>
 				<div
 					class="flex items-center justify-center gap-4 -ml-5 sm:-ml-10 lg:-ml-14 gap-x-0 sm:gap-x-2 relative"
 				>
 					<div
 						class="m-0 text-5xl sm:text-7xl opacity-60 font-extralight number text-center sm:text-right"
 					>
-						{++index}.
+						{getSongIndex(song) + 1}
 					</div>
 					<div class="w-full md:max-w-xl">
 						<Card
@@ -121,29 +128,31 @@
 						/>
 					</div>
 				</div>
-			{/each}
+			</Draggable>
 		</div>
 	{:else}
 		<p class="text-center">Listen er tom - Find en sang for at tilføje den</p>
 	{/if}
 	<Fab>
 		<div class="flex flex-row md:flex-col justify-center md:gap-2 max-md:btn-group">
-			<button class="btn btn-circle md:btn-outline md:btn-lg btn-primary max-md:w-16"><ShareIcon size="{iconSize}" /></button>
+			<button class="btn btn-circle md:btn-outline md:btn-lg btn-primary max-md:w-16"
+				><ShareIcon size={iconSize} /></button
+			>
 			<button
 				class="btn btn-circle md:btn-lg md:btn-outline max-md:btn-primary btn-secondary swap swap-rotate max-md:w-16"
 				class:swap-active={edit}
 				on:click={() => (edit = !edit)}
 			>
 				<span class="swap-on">
-					<SaveIcon size="{iconSize}" />
+					<SaveIcon size={iconSize} />
 				</span>
 				<span class="swap-off">
-					<PenIcon size="{iconSize}" />
+					<PenIcon size={iconSize} />
 				</span>
 			</button>
 			<button
 				class="btn btn-circle md:btn-lg max-md:btn-primary md:btn-outline btn-error max-md:w-16"
-				on:click={() => (checkDelete = !checkDelete)}><DeleteIcon size="{iconSize}" /></button
+				on:click={() => (checkDelete = !checkDelete)}><DeleteIcon size={iconSize} /></button
 			>
 		</div>
 	</Fab>
