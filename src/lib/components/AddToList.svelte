@@ -99,6 +99,7 @@
 			{/if}
 			{#if newList}
 				<div class="input-group px-2">
+					<!-- TODO: Scroll to bottom on focus -->
 					<input
 						bind:value={listName}
 						on:keypress={(event) => (event.key == 'Enter' ? createList(listName) : '')}

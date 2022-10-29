@@ -21,14 +21,16 @@
 	export let actionIcon = null;
 	export let actionClass = "";
 	
-	$: route = `/sange/${encode(song.name)}`
+	$: songRoute = `/sange/${encode(song.name)}`
+	$: categoryRoute = `/kategorier/${encode(song.categories?.name)}`
+	$: authorRoute = `/forfattere/${encode(song.authors[0]?.name)}`
 
 	const dispatch = createEventDispatcher();
 </script>
 
 {#if song}
 	<Card hover={!disabled}>
-		<a href={disabled ? null : route} class="no-underline font-normal h-full">
+		<a href={disabled ? null : songRoute} class="no-underline font-normal h-full">
 			<div class:compact={compact} class="card-body p-5 pb-2 h-full justify-between">
 				<h2 class="card-title my-0 flex items-center">
 					<div class="badge badge-primary float-left">{song.number}</div>
@@ -43,14 +45,14 @@
 				<div class="card-actions flex items-center">
 					{#if Object.keys(song.categories).length}
 						<a
-							href="/kategorier/{encode(song.categories?.name)}"
+							href={disabled ? null : categoryRoute}
 							class="link link-hover no-underline font-normal"
 							><div class="badge badge-ghost">{song.categories?.name}</div></a
 						>
 					{/if}
 					{#if song.authors.length}
 						<a
-							href="/forfattere/{encode(song.authors[0]?.name)}"
+							href={disabled ? null : authorRoute}
 							class="link link-hover no-underline font-normal"
 							><div class="badge badge-ghost">{song.authors[0]?.name}</div></a
 						>
