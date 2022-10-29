@@ -1,12 +1,9 @@
 <script>
-	import { flip } from 'svelte/animate';
+	export let items = [];
+	export let wrapperClass = '';
+	export let itemClass = '';
+	export let disabled = true;
 
-	export let items = [
-		{ name: 'foo', id: 0 },
-		{ name: 'bar', id: 1 },
-		{ name: 'bob', id: 2 },
-		{ name: 'jean', id: 3 }
-	];
 	let hovering = null;
 
 	const drop = (event, target) => {
@@ -37,36 +34,34 @@
 	}
 </script>
 
-<div class="draggable">
+<div class="draggable {wrapperClass}">
 	{#each items as item, index (index)}
-    <slot prop={item}>
 		<div
-			class="draggable-item"
+			class="draggable-item {itemClass}"
 			draggable={true}
-			on:dragstart={(event) => dragstart(event, index)}
-			on:drop|preventDefault={(event) => drop(event, index)}
+			on:dragstart={(event) => (disabled ? '' : dragstart(event, index))}
+			on:drop|preventDefault={(event) => (disabled ? '' : drop(event, index))}
 			on:dragover={dragover}
-			on:dragenter={() => (hovering = index)}
+			on:dragenter={() => (disabled ? '' : (hovering = index))}
 			class:is-active={hovering === index}
 		>
-			<slot name="draggable" />
+			<slot prop={item} />
 		</div>
-    </slot>
 	{/each}
 </div>
 
 <style>
 	.draggable-item {
 		display: block;
-		padding: 0.5em 1em;
 	}
 
-	.draggable-item:not(:last-child) {
-		border-bottom: 1px solid #dbdbdb;
+	:global(.draggable-item .item) {
+		@apply cursor-grab;
 	}
 
-	.draggable-item.is-active {
-		background-color: #3273dc;
-		color: #fff;
+	:global(.draggable-item.is-active .item) {
+		@apply outline-dashed;
+		@apply outline-2;
+		@apply rounded-box;
 	}
 </style>

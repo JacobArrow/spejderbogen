@@ -15,17 +15,20 @@
 	import { scale } from "svelte/transition";
 
 	export let song;
+	export let disabled = false;
 	export let compact = false;
 	export let action = false;
 	export let actionIcon = null;
 	export let actionClass = "";
+	
+	$: route = `/sange/${encode(song.name)}`
 
 	const dispatch = createEventDispatcher();
 </script>
 
 {#if song}
-	<Card>
-		<a href="/sange/{encode(song.name)}" class="no-underline font-normal h-full">
+	<Card hover={!disabled}>
+		<a href={disabled ? null : route} class="no-underline font-normal h-full">
 			<div class:compact={compact} class="card-body p-5 pb-2 h-full justify-between">
 				<h2 class="card-title my-0 flex items-center">
 					<div class="badge badge-primary float-left">{song.number}</div>
