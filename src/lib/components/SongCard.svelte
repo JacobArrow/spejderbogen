@@ -12,18 +12,20 @@
 
 	//Misc
 	import { quintIn } from 'svelte/easing';
-	import { scale } from "svelte/transition";
+	import { scale } from 'svelte/transition';
 
 	export let song;
 	export let disabled = false;
 	export let compact = false;
 	export let action = false;
 	export let actionIcon = null;
-	export let actionClass = "";
-	
-	$: songRoute = `/sange/${encode(song.name)}`
-	$: categoryRoute = `/kategorier/${encode(song.categories?.name)}`
-	$: authorRoute = `/forfattere/${encode(song.authors[0]?.name)}`
+	export let actionClass = '';
+	export let relativePath = '/sange';
+	export let urlParmas = '';
+
+	$: songRoute = `${relativePath}/${encode(song.name)}${urlParmas}`;
+	$: categoryRoute = `/kategorier/${encode(song.categories?.name)}`;
+	$: authorRoute = `/forfattere/${encode(song.authors[0]?.name)}`;
 
 	const dispatch = createEventDispatcher();
 </script>
@@ -31,7 +33,7 @@
 {#if song}
 	<Card hover={!disabled}>
 		<a href={disabled ? null : songRoute} class="no-underline font-normal h-full">
-			<div class:compact={compact} class="card-body p-5 pb-2 h-full justify-between">
+			<div class:compact class="card-body p-5 pb-2 h-full justify-between">
 				<h2 class="card-title my-0 flex items-center">
 					<div class="badge badge-primary float-left">{song.number}</div>
 					<span class="line-clamp-1">{song.name}</span>
@@ -51,9 +53,7 @@
 						>
 					{/if}
 					{#if song.authors.length}
-						<a
-							href={disabled ? null : authorRoute}
-							class="link link-hover no-underline font-normal"
+						<a href={disabled ? null : authorRoute} class="link link-hover no-underline font-normal"
 							><div class="badge badge-ghost">{song.authors[0]?.name}</div></a
 						>
 					{/if}

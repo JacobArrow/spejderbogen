@@ -4,7 +4,6 @@
 	import Header from '$components/Header.svelte';
 	import Modal from '$lib/components/Modal.svelte';
 	import Fab from '$lib/components/FAB.svelte';
-	import ConditionalWrapper from '$lib/components/ConditionalWrapper.svelte';
 
 	//Data
 	import { liveQuery } from 'dexie';
@@ -31,7 +30,7 @@
 	$: isTablet = $scrollPosition.clientWidth < 768;
 	$: iconSize = isTablet ? '25' : '30';
 
-	const slug = decode($page.params.slug);
+	const slug = decode($page.params.listSlug);
 	let edit = false;
 	let checkDelete = false;
 	let listName;
@@ -113,28 +112,29 @@
 		</div>
 	</Header>
 	{#if listSongs.length}
-			<Draggable
-				bind:items={listSongs}
-				let:prop={song}
-				disabled={!edit}
-				wrapperClass="m-auto flex flex-col gap-4 mb-14 md:mb-6 -ml-5 sm:-ml-10 lg:-ml-14"
-				itemClass="flex items-center justify-center gap-4 gap-x-0 sm:gap-x-2 relative"
+		<Draggable
+			bind:items={listSongs}
+			let:prop={song}
+			disabled={!edit}
+			wrapperClass="m-auto flex flex-col gap-4 mb-14 md:mb-6 -ml-5 sm:-ml-10 lg:-ml-14"
+			itemClass="flex items-center justify-center gap-4 gap-x-0 sm:gap-x-2 relative"
+		>
+			<div
+				class="m-0 text-5xl sm:text-7xl opacity-60 font-extralight number text-center sm:text-right"
 			>
-				<div
-					class="m-0 text-5xl sm:text-7xl opacity-60 font-extralight number text-center sm:text-right"
-				>
-					{getSongIndex(song) + 1}
-				</div>
-				<div class="w-full md:max-w-xl item">
-					<Card
-						on:action={(event) => removeSongFromList(event.detail.id)}
-						action={edit}
-						disabled={edit}
-						{song}
-						compact
-					/>
-				</div>
-			</Draggable>
+				{getSongIndex(song) + 1}
+			</div>
+			<div class="w-full md:max-w-xl item">
+				<Card
+					on:action={(event) => removeSongFromList(event.detail.id)}
+					action={edit}
+					disabled={edit}
+					urlParmas="?list={slug}"
+					{song}
+					compact
+				/>
+			</div>
+		</Draggable>
 	{:else}
 		<p class="text-center">Listen er tom - Find en sang for at tilføje den</p>
 	{/if}

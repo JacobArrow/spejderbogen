@@ -64,6 +64,7 @@
 				</Card>
 			</PaginatedList>
 		</CardGrid>
+		<p class="text-center">Find en sang for at oprette nye lister</p>
 	</div>
 {:else}
 	<p class="text-center">Du har ingen lister<br />Find en sang for at oprette din første liste</p>

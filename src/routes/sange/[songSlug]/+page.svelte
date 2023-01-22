@@ -9,17 +9,37 @@
 	import Song from '$components/Song.svelte';
 	import Pagination from '$components/Pagination.svelte';
 
+	//Icons
+	import ArrowLeft from 'svelte-material-icons/ArrowLeft.svelte';
+
 	//Data
 	import { liveQuery } from 'dexie';
 	import { db } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
 	import Card from '$components/Card.svelte';
-	let songNumber = 0;
 
-	$: slug = decode($page.params.slug);
+	$: slug = decode($page.params.songSlug);
+	$: listId = $page.url.searchParams.get('list');
+
+	$: paginationCount = () => {
+		if ($listData?.songs) return $listData.songs.length;
+		if ($songs) return $songs.length - 2;
+	};
+
+	$: songNumber = () => {
+		if ($listData?.songs && $song) {
+			return $listData.songs.findIndex((listSong) => listSong.number === $song.number) + 1;
+		}
+		if ($song) {
+			return $song.number;
+		}
+		return 0;
+	};
 
 	async function pagination(event) {
-		const song = await db.songs.where('number').equals(event.detail.page).first();
+		var songNumber = $listData ? $listData.songs[event.detail.page - 1].number : event.detail.page;
+
+		const song = await db.songs.where('number').equals(songNumber).first();
 		if (encode(song.name) !== slug) goto(`${encode(song.name)}`, { replaceState: false });
 	}
 
@@ -31,11 +51,16 @@
 	$: song = liveQuery(async () => {
 		if ($songs) {
 			const song = await db.songs.where('name').equalsIgnoreCase(slug).first();
-			songNumber = song.number;
 			incrementSong(song.id);
 			incrementCategory(song.categori_id);
 			return song;
 		}
+	});
+
+	$: listData = liveQuery(async () => {
+		const list = await db.lists.where('id').equals(parseInt(listId)).first();
+		const songs = await db.songs.bulkGet(list.ids);
+		return { songs, list };
 	});
 </script>
 
@@ -45,16 +70,21 @@
 </svelte:head>
 
 <div class="mx-auto max-w-2xl">
+	{#if $listData}
+		<p class="my-0 mb-3">
+			<a href="/lister/{$listData.list.id}" class="btn btn-primary gap-1">
+				<ArrowLeft size="18px" />Tilbage til listen
+			</a>
+		</p>
+	{/if}
 	{#if $song}
 		<Song song={$song} />
 		{#if $songs}
-			<div
-				class="fixed bottom-12 sm:bottom-16 left-2/4 -translate-x-2/4 xl:col-span-full"
-			>
+			<div class="fixed bottom-12 sm:bottom-16 left-2/4 -translate-x-2/4 xl:col-span-full">
 				<Pagination
 					on:clicked={pagination}
-					count={$songs.length - 2}
-					page={songNumber}
+					count={paginationCount()}
+					page={songNumber()}
 					min={1}
 					show={1}
 					offset={0}
