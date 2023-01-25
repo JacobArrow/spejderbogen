@@ -15,6 +15,7 @@
 </script>
 
 {#if open}
+	<!-- svelte-ignore a11y-click-events-have-key-events -->
 	<div
 		transition:fade={{ duration: 150 }}
 		on:click|self={() => (open = false)}

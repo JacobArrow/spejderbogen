@@ -36,11 +36,17 @@
 		return 0;
 	};
 
+	$: params = () => {
+		if ($listData) return `?list=${$listData.list.id}`;
+		return '';
+	};
+
 	async function pagination(event) {
 		var songNumber = $listData ? $listData.songs[event.detail.page - 1].number : event.detail.page;
 
 		const song = await db.songs.where('number').equals(songNumber).first();
-		if (encode(song.name) !== slug) goto(`${encode(song.name)}`, { replaceState: false });
+		if (encode(song.name) !== slug)
+			goto(`${encode(song.name)}${params()}`, { replaceState: false });
 	}
 
 	$: songs = liveQuery(async () => {

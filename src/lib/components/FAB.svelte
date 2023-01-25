@@ -21,6 +21,9 @@
 	$: $scrollPosition.scrollTop > 0 ? calculateScrollPosition($scrollPosition) : null;
 </script>
 
-<div class="fixed z-50 right-0 md:right-8 2xl:right-14 sm:mb-6 w-full md:w-min" style="bottom:{$scrollPosition.visibleFooter ? 50 : bottom}px">
+<div
+	class="fixed z-50 right-0 md:right-8 2xl:right-14 sm:mb-6 w-full md:w-min"
+	style="bottom:{$scrollPosition.visibleFooter ? 50 : bottom}px"
+>
 	<slot />
 </div>

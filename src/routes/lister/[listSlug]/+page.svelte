@@ -18,9 +18,10 @@
 
 	//Functions
 	import { page } from '$app/stores';
-	import { decode } from '$functions/convertUrl';
+	import { decode, encode } from '$functions/convertUrl';
 	import autosize from 'svelte-autosize';
 	import { goto } from '$app/navigation';
+	import { generateLocalGuid, getLocalGuid } from '$functions/guid';
 
 	//Misc
 	import { scrollPosition } from '$lib/data/misc';
@@ -29,12 +30,19 @@
 
 	$: isTablet = $scrollPosition.clientWidth < 768;
 	$: iconSize = isTablet ? '25' : '30';
+	$: shareableLink = `${$page.url.host}/lister?name=${$data ? encode($data.list.name) : ''}&ids=${
+		$data ? $data.list.ids : ''
+	}`;
+
+	$: console.log($data);
 
 	const slug = decode($page.params.listSlug);
 	let edit = false;
 	let checkDelete = false;
+	let showShareModal = true;
 	let listName;
 	let listSongs = [];
+	let copied = false;
 
 	$: data = liveQuery(async () => {
 		const list = await db.lists.where('id').equals(parseInt(slug)).first();
@@ -69,6 +77,22 @@
 	function getSongIndex(song) {
 		return listSongs.indexOf(song);
 	}
+
+	function copyToClipboard() {
+		navigator.clipboard.writeText(shareableLink);
+		copied = true;
+		setTimeout(() => {
+			copied = false;
+		}, 2000);
+	}
+
+	async function shareList() {
+		generateLocalGuid();
+		showShareModal = !showShareModal;
+		await db.lists.update($data.list.id, {
+			guid: getLocalGuid()
+		});
+	}
 </script>
 
 <svelte:head>
@@ -84,6 +108,12 @@
 			<div class="w-fit m-auto relative swap-on">
 				<textarea
 					bind:value={listName}
+					on:keydown={(e) => {
+						if (e.key === 'Enter') {
+							e.preventDefault();
+							updateList();
+						}
+					}}
 					use:autosize
 					rows="1"
 					type="text"
@@ -140,9 +170,12 @@
 	{/if}
 	<Fab>
 		<div class="flex flex-row md:flex-col justify-center md:gap-2 max-md:btn-group">
-			<button class="btn btn-circle md:btn-outline md:btn-lg btn-primary max-md:w-16"
-				><ShareIcon size={iconSize} /></button
+			<button
+				on:click={shareList}
+				class="btn btn-circle md:btn-outline md:btn-lg btn-primary max-md:w-16"
 			>
+				<ShareIcon size={iconSize} />
+			</button>
 			<button
 				class="btn btn-circle md:btn-lg md:btn-outline max-md:btn-primary btn-secondary swap swap-rotate max-md:w-16"
 				class:swap-active={edit}
@@ -172,6 +205,28 @@
 	on:yes={deleteList}
 	on:no={() => (checkDelete = !checkDelete)}
 />
+
+<Modal
+	title="Del listen via nedenstående link"
+	accept="Luk"
+	deny=""
+	bind:open={showShareModal}
+	on:yes={() => (showShareModal = !showShareModal)}
+>
+	<div class="relative">
+		<pre class="flex">
+			<code class="whitespace-nowrap leading-none pb-2 pt-10">
+				{shareableLink}
+			</code>
+		</pre>
+		<button
+			on:click={copyToClipboard}
+			class="swap btn btn-ghost btn-sm btn-outline font-sans absolute right-2 top-2"
+			class:swap-active={copied}
+			><span class="swap-off">Kopier</span><span class="swap-on">Kopieret!</span></button
+		>
+	</div>
+</Modal>
 
 <style lang="scss">
 	.textarea {

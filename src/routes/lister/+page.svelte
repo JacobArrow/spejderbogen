@@ -13,14 +13,6 @@
 	import { db } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
 
-	//Misc
-	import { v4 as uuidv4 } from 'uuid';
-	import { list } from 'postcss';
-
-	let guid;
-	let showModal = false;
-	const listKeyItem = 'listKey';
-
 	$: lists = liveQuery(async () => {
 		return await db.lists.toArray();
 	});
@@ -28,17 +20,7 @@
 	async function deleteList(listId) {
 		await db.lists.delete(listId);
 	}
-
-	function createList() {
-		//db.lists.add({ id: uuidv4() });
-	}
-
-	function shareList() {
-		let listKey = localStorage.getItem(listKeyItem) || localStorage.setItem(listKeyItem, uuidv4());
-	}
 </script>
-
-<button on:click={createList} class="btn">Opret GUID</button>
 
 <svelte:head>
 	<title>{DEFAULT_TITLE} - Favoritter</title>
