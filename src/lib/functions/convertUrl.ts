@@ -2,7 +2,7 @@ const rules = {
 	å: 'aa',
 	ø: 'oe',
 	æ: 'ae',
-	'_': ' ',
+	_: ' ',
 	' ': '_'
 };
 
@@ -15,6 +15,7 @@ function swap(obj) {
 }
 
 export const encode = (string: string) => {
+	if (!string) return string;
 	string = string.toLowerCase();
 	for (const key in rules) {
 		string = string?.split(key).join(rules[key]);
@@ -23,6 +24,7 @@ export const encode = (string: string) => {
 };
 
 export const decode = (string: string) => {
+	if (!string) return string;
 	const r = swap(rules);
 	for (const key in r) {
 		string = string?.split(key).join(r[key]);
