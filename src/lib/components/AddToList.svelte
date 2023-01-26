@@ -29,9 +29,9 @@
 	});
 
 	async function createList(name) {
-		name.length
+		name = name.length
 			? name.charAt(0).toUpperCase() + name.slice(1)
-			: (name = `Liste ${$lists.length + 1}`);
+			: `Liste ${$lists.length + 1}`;
 		await db.lists.add({ name: name, ids: [] });
 		listName = '';
 		newList = false;
@@ -87,10 +87,12 @@
 								class="btn btn-ghost btn-sm text-current h-fit flex-shrink grow basis-auto"
 								>{list.name}<span class="ml-1">({list.ids.length})</span>
 							</button>
-                            <a href="/lister/{list.id}"
-                            class="p-1 btn btn-ghost btn-square btn-sm text-current w-fit h-fit">
-                                <PenIcon size="20px" />
-                            </a>
+							<a
+								href="/lister/{list.id}"
+								class="p-1 btn btn-ghost btn-square btn-sm text-current w-fit h-fit"
+							>
+								<PenIcon size="20px" />
+							</a>
 						</li>
 					{/each}
 				</ul>
