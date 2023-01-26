@@ -4,6 +4,7 @@
 	import CardGrid from '$components/CardGrid.svelte';
 	import Card from '$components/CompactCard.svelte';
 	import Header from '$components/Header.svelte';
+	import Modal from '$components/Modal.svelte';
 
 	//Icons
 	import TrashIcon from 'svelte-material-icons/Delete.svelte';
@@ -18,7 +19,15 @@
 	//Misc
 	import { onMount } from 'svelte';
 
-	$: listName = $page.url.searchParams.get('name');
+	//functions
+	import { decode } from '$functions/convertUrl';
+	import { goto } from '$app/navigation';
+
+	let newListAdded = false;
+	let listToDelete = 0;
+	let checkDelete = false;
+
+	$: listName = decode($page.url.searchParams.get('name'));
 	$: listSongIds = $page.url.searchParams.get('ids');
 
 	$: lists = liveQuery(async () => {
@@ -27,17 +36,23 @@
 
 	onMount(async () => {
 		if (listName && listSongIds) {
-			await db.lists.add({
-				name: listName,
-				ids: listSongIds.split(',').map((id) => parseInt(id)),
-				fromShare: true
-			});
-			history.replaceState(null, '', '/lister');
+			await db.lists
+				.add({
+					name: listName,
+					ids: listSongIds.split(',').map((id) => parseInt(id)),
+					fromShare: true
+				})
+				.then((listId) => {
+					goto(`/lister/${listId}`, { replaceState: true });
+				});
+			newListAdded = true;
 		}
 	});
 
-	async function deleteList(listId) {
-		await db.lists.delete(listId);
+	async function deleteList() {
+		await db.lists.delete(listToDelete);
+		newListAdded = false;
+		checkDelete = !checkDelete;
 	}
 </script>
 
@@ -55,16 +70,24 @@
 					path={`${list.id}`}
 					content={list.name}
 					badgeContent={`${list.ids.length} sange`}
+					classes={newListAdded && $lists.slice(-1).pop() === list
+						? 'animate-pulse short-animation'
+						: ''}
 				>
 					<button
-						class="btn btn-circle btn-xs btn-error h-7 w-7 absolute -top-2 -right-2 animate-pulse"
-						on:click|preventDefault={() => deleteList(list.id)}
+						class="btn btn-circle btn-xs btn-error h-7 w-7 absolute -top-2 -right-2 z-10"
+						on:click|preventDefault={() => {
+							listToDelete = list.id;
+							checkDelete = !checkDelete;
+						}}
 					>
 						<TrashIcon size="18px" />
 					</button>
 					{#if list.fromShare}
-						<div class="absolute">
-							<LinkIcon size="24px" />
+						<div class="card absolute top-0 left-0 w-full h-full overflow-hidden">
+							<div class="absolute -left-5 -top-6 opacity-30 text-primary stroke-primary">
+								<LinkIcon size="120px" />
+							</div>
 						</div>
 					{/if}
 				</Card>
@@ -76,26 +99,10 @@
 	<p class="text-center">Du har ingen lister<br />Find en sang for at oprette din første liste</p>
 {/if}
 
-<!-- https://www.florin-pop.com/blog/2019/03/css-pulse-effect/ -->
-<style>
-	.pulse-animate {
-		animation: pulse 2s infinite;
-	}
-
-	@keyframes pulse {
-		0% {
-			transform: scale(0.95);
-			box-shadow: 0 0 0 0 rgba(0, 0, 0, 0.7);
-		}
-
-		70% {
-			transform: scale(1);
-			box-shadow: 0 0 0 10px rgba(0, 0, 0, 0);
-		}
-
-		100% {
-			transform: scale(0.95);
-			box-shadow: 0 0 0 0 rgba(0, 0, 0, 0);
-		}
-	}
-</style>
+<Modal
+	bind:open={checkDelete}
+	title="Vil du slette listen?"
+	text="Denne handling kan ikke fortrydes"
+	on:yes={deleteList}
+	on:no={() => (checkDelete = !checkDelete)}
+/>

@@ -34,12 +34,10 @@
 		$data ? $data.list.ids : ''
 	}`;
 
-	$: console.log($data);
-
 	const slug = decode($page.params.listSlug);
 	let edit = false;
 	let checkDelete = false;
-	let showShareModal = true;
+	let showShareModal = false;
 	let listName;
 	let listSongs = [];
 	let copied = false;
@@ -66,11 +64,10 @@
 		edit = false;
 	}
 
-	async function removeSongFromList(id) {
-		const ids = $data.list.ids.filter((songId) => songId !== id);
-		console.log(ids);
+	async function removeSongFromList(songIndex) {
+		listSongs.splice(songIndex, 1);
 		await db.lists.update($data.list.id, {
-			ids
+			ids: listSongs.map((song) => song.id)
 		});
 	}
 
@@ -101,6 +98,9 @@
 </svelte:head>
 
 {#if $data}
+	{#if $data.list.fromShare}
+		<p class="text-sm text-center m-0">Denne liste er blevet delt med dig</p>
+	{/if}
 	<Header>
 		<div class="swap" class:swap-active={edit}>
 			<!-- TODO: Add smooth transition -->
@@ -156,7 +156,7 @@
 			</div>
 			<div class="w-full md:max-w-xl item">
 				<Card
-					on:action={(event) => removeSongFromList(event.detail.id)}
+					on:action={(event) => removeSongFromList(getSongIndex(song))}
 					action={edit}
 					disabled={edit}
 					urlParmas="?list={slug}"
@@ -221,14 +221,13 @@
 		</pre>
 		<button
 			on:click={copyToClipboard}
-			class="swap btn btn-ghost btn-sm btn-outline font-sans absolute right-2 top-2 outline-offset-1"
+			class="swap btn btn-ghost btn-sm btn-outline font-sans text-neutral-content hover:text-base-200 absolute right-2 top-2 outline-offset-1"
 			class:swap-active={copied}
 			class:outline={copied}
 		>
 			<span class="swap-off">Kopier</span>
 			<span class="swap-on">Kopieret!</span>
-		</button
-		>
+		</button>
 	</div>
 </Modal>
 

@@ -9,12 +9,13 @@
 	export let path = '';
 	export let content = '';
 	export let badgeContent = '';
+	export let classes = '';
 </script>
 
-<Card>
+<Card {classes}>
 	<a href="/{subPath}/{encode(path)}" class="no-underline h-full">
 		<div class="card-body p-5 h-full">
-			<h2 class=" my-0 flex items-center justify-between">
+			<h2 class=" my-0 flex items-center justify-between z-10">
 				<span class="line-clamp-1">{content}</span>
 				{#if badgeContent}
 					<div class="badge justify-self-end badge-primary whitespace-nowrap">{badgeContent}</div>

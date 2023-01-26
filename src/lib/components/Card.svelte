@@ -1,8 +1,9 @@
 <script>
 	export let hover = true;
+	export let classes = '';
 </script>
 
-<div class:hover class="card shadow-md overflow-visible w-full">
+<div class:hover class={`card shadow-md overflow-visible w-full ${classes}`}>
 	<slot />
 </div>
 
