@@ -221,9 +221,13 @@
 		</pre>
 		<button
 			on:click={copyToClipboard}
-			class="swap btn btn-ghost btn-sm btn-outline font-sans absolute right-2 top-2"
+			class="swap btn btn-ghost btn-sm btn-outline font-sans absolute right-2 top-2 outline-offset-1"
 			class:swap-active={copied}
-			><span class="swap-off">Kopier</span><span class="swap-on">Kopieret!</span></button
+			class:outline={copied}
+		>
+			<span class="swap-off">Kopier</span>
+			<span class="swap-on">Kopieret!</span>
+		</button
 		>
 	</div>
 </Modal>
