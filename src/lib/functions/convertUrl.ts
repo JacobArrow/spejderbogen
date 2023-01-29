@@ -14,9 +14,9 @@ function swap(obj) {
 	return ret;
 }
 
-export const encode = (string: string) => {
+export const encode = (string: string, lowerCase = true) => {
 	if (!string) return string;
-	string = string.toLowerCase();
+	string = lowerCase ? string.toLowerCase() : string;
 	for (const key in rules) {
 		string = string?.split(key).join(rules[key]);
 	}

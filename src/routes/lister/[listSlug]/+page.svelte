@@ -30,9 +30,11 @@
 
 	$: isTablet = $scrollPosition.clientWidth < 768;
 	$: iconSize = isTablet ? '25' : '30';
-	$: shareableLink = `${$page.url.host}/lister?name=${$data ? encode($data.list.name) : ''}&ids=${
-		$data ? $data.list.ids : ''
-	}`;
+	$: shareableLink = $data
+		? `${$page.url.host}/lister` +
+		  `?name=${encode($data.list.name, false)}` +
+		  `&ids=${$data.list.ids}`
+		: '';
 	$: slug = decode($page.params.listSlug);
 
 	let edit = false;
@@ -170,12 +172,14 @@
 	{/if}
 	<Fab>
 		<div class="flex flex-row md:flex-col justify-center md:gap-2 max-md:btn-group">
-			<button
-				on:click={shareList}
-				class="btn btn-circle md:btn-outline md:btn-lg btn-primary max-md:w-16"
-			>
-				<ShareIcon size={iconSize} />
-			</button>
+			{#if listSongs.length}
+				<button
+					on:click={shareList}
+					class="btn btn-circle md:btn-outline md:btn-lg btn-primary max-md:w-16"
+				>
+					<ShareIcon size={iconSize} />
+				</button>
+			{/if}
 			<button
 				class="btn btn-circle md:btn-lg md:btn-outline max-md:btn-primary btn-secondary swap swap-rotate max-md:w-16"
 				class:swap-active={edit}
