@@ -23,7 +23,7 @@
 </svelte:head>
 
 <Header>Alle sange</Header>
-<div class="lg:-mb-9">
+<div class="xl:-mb-9">
 	<CardGrid>
 		{#if $songs?.length}
 			<PaginatedList data={$songs} let:data={indexedData} page={0}>
@@ -36,3 +36,4 @@
 		{/if}
 	</CardGrid>
 </div>
+<div class="mb-14 sm:mb-8 xl:mb-0" />

@@ -35,9 +35,12 @@
 
 {#if $data}
 	<Header>Sange af {$data.author.name}</Header>
-	<CardGrid>
-		<PaginatedList data={$data.songs} let:data={indexedData} page={0}>
-			<Card song={indexedData} />
-		</PaginatedList>
-	</CardGrid>
+	<div class="xl:-mb-9">
+		<CardGrid>
+			<PaginatedList data={$data.songs} let:data={indexedData} page={0}>
+				<Card song={indexedData} />
+			</PaginatedList>
+		</CardGrid>
+	</div>
+	<div class="mb-14 sm:mb-8 xl:mb-0" />
 {/if}

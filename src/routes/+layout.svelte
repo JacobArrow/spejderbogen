@@ -29,7 +29,7 @@
 
 <Drawer {title}>
 	<Navbar {title} />
-	<main class="prose p-4 max-w-none sm:p-10 overflow-x-hidden">
+	<main class="prose p-4 max-w-none sm:p-10 overflow-x-hidden relative">
 		<div class="container mx-auto">
 			<slot />
 		</div>

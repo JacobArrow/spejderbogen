@@ -57,3 +57,25 @@ function createNetworkStatusStore() {
 }
 
 export const isOnline = createNetworkStatusStore();
+
+function createScrollPositionStore() {
+	const scrollPosition = writable({
+		scrollTop: 0,
+		clientHeight: 0,
+		scrollHeight: 0,
+		clientWidth: 0,
+		visibleFooter: false
+	});
+
+	function set(obj) {
+		scrollPosition.set(obj);
+	}
+
+	const { subscribe } = scrollPosition;
+	return {
+		subscribe,
+		set
+	};
+}
+
+export const scrollPosition = createScrollPositionStore();

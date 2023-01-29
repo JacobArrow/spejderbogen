@@ -8,6 +8,9 @@ const config = {
 			xs: '475px',
 			...defaultTheme.screens
 		},
+		colors: {
+			'error-focus': '#9f0324',
+		  },
 	},
 
 	plugins: [
@@ -26,10 +29,10 @@ const config = {
 			{
 				dark: {
 					primary: '#023968',
-					'primary-focus': '#035196',
+					'primary-focus': '#04213a',
 					'primary-content': '#ffffff',
-					secondary: '#f000b8',
-					'secondary-focus': '#bd0091',
+					secondary: '#00a0d1',
+					'secondary-focus': '#00789d',
 					'secondary-content': '#ffffff',
 					accent: '#37cdbe',
 					'accent-focus': '#2aa79b',
@@ -42,9 +45,10 @@ const config = {
 					'base-300': '#16181d',
 					'base-content': '#ebecf0',
 					info: '#00A0D1',
-					success: '#87d039',
+					success: '#7eb300',
 					warning: '#e2d562',
 					error: '#C1002B',
+					'error-content': '#ffffff',
 					'input-icon': '#ffffff',
 					'--border-color': 'var(--b3)',
 					'--rounded-box': '1rem',
@@ -61,10 +65,10 @@ const config = {
 				},
 				light: {
 					primary: '#023968',
-					'primary-focus': '#035196',
+					'primary-focus': '#04213a',
 					'primary-content': '#ffffff',
-					secondary: '#f000b8',
-					'secondary-focus': '#bd0091',
+					secondary: '#00a0d1',
+					'secondary-focus': '#00789d',
 					'secondary-content': '#ffffff',
 					accent: '#37cdbe',
 					'accent-focus': '#2aa79b',
@@ -77,9 +81,10 @@ const config = {
 					'base-300': '#d1d5db',
 					'base-content': '#1f2937',
 					info: '#00A0D1',
-					success: '#009485',
+					success: '#7eb300',
 					warning: '#ff9900',
 					error: '#C1002B',
+					'error-content': '#ffffff',
 					'input-icon': '#023968',
 					'--border-color': 'var(--b3)',
 					'--rounded-box': '1rem',

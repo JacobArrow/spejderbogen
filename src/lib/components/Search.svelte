@@ -56,7 +56,7 @@
 <style lang="scss">
 	:global(html[data-theme='light']) {
 		& .search .close {
-			@apply text-white;
+			@apply text-base-content;
 		}
 		& .search.focus .close {
 			@apply text-neutral;

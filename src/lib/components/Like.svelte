@@ -12,8 +12,7 @@
 	export let disabled = false;
 
 	$: liked = liveQuery(async () => {
-		const like = await db.likes.where('id').equals(songId).first();
-		return like;
+		return await db.likes.where('id').equals(songId).first();
 	});
 
 	async function like() {
@@ -38,7 +37,7 @@
 >
 	<div class="swap" class:text-error={$liked} class:swap-active={$liked}>
 		<div class="swap-on"><HeartIcon size="24px" /></div>
-		<div class="swap-iff"><HeartOutlineIcon size="24px" /></div>
+		<div class="swap-off"><HeartOutlineIcon size="24px" /></div>
 	</div>
 </button>
 
