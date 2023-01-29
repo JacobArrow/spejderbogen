@@ -22,11 +22,16 @@
 	let listName = '';
 	let showMenu = false;
 	let duplicate = false;
+	let songAdded = false;
 	let selectedList;
 
 	$: lists = liveQuery(async () => {
 		return await db.lists.toArray();
 	});
+
+	$: checkListAdded = (list) => {
+		return selectedList && songAdded ? selectedList.id === list.id : false;
+	};
 
 	async function createList(name) {
 		name = name.length
@@ -38,8 +43,8 @@
 	}
 
 	function checkForDuplicate(list, songId) {
+		selectedList = list;
 		if (list.ids.includes(songId)) {
-			selectedList = list;
 			duplicate = true;
 		} else {
 			addSongToList(list, songId);
@@ -49,9 +54,20 @@
 	async function addSongToList(list, songId) {
 		duplicate = false;
 		list.ids.push(songId);
-		await db.lists.put({ id: list.id, name: list.name, ids: list.ids });
-		showMenu = false;
-		selectedList = null;
+		await db.lists.put({ id: list.id, name: list.name, ids: list.ids }).then(async (listId) => {
+			songAdded = true;
+			await db.lists
+				.where('id')
+				.equals(listId)
+				.first()
+				.then((list) => {
+					selectedList = list;
+					setTimeout(() => {
+						songAdded = false;
+						selectedList = null;
+					}, 2000);
+				});
+		});
 	}
 </script>
 
@@ -83,9 +99,18 @@
 					{#each $lists as list}
 						<li class="p-0 flex items-center gap-1">
 							<button
+								disabled={checkListAdded(list)}
 								on:click={() => checkForDuplicate(list, songId)}
-								class="btn btn-ghost btn-sm text-current h-fit flex-shrink grow basis-auto"
-								>{list.name}<span class="ml-1">({list.ids.length})</span>
+								class="btn btn-ghost btn-sm text-current h-fit flex-shrink grow basis-auto swap"
+								class:swap-active={checkListAdded(list)}
+							>
+								<span class="swap-off">
+									{list.name}
+									<span class="ml-1">
+										({list.ids.length})
+									</span>
+								</span>
+								<span class="swap-on"> Tilføjet! </span>
 							</button>
 							<a
 								href="/lister/{list.id}"

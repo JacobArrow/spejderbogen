@@ -33,8 +33,8 @@
 	$: shareableLink = `${$page.url.host}/lister?name=${$data ? encode($data.list.name) : ''}&ids=${
 		$data ? $data.list.ids : ''
 	}`;
+	$: slug = decode($page.params.listSlug);
 
-	const slug = decode($page.params.listSlug);
 	let edit = false;
 	let checkDelete = false;
 	let showShareModal = false;

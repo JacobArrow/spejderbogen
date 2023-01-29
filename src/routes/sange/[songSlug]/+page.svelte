@@ -64,6 +64,7 @@
 	});
 
 	$: listData = liveQuery(async () => {
+		if (!listId) return;
 		const list = await db.lists.where('id').equals(parseInt(listId)).first();
 		const songs = await db.songs.bulkGet(list.ids);
 		return { songs, list };
@@ -72,7 +73,7 @@
 
 <svelte:head>
 	<meta name="robots" content="noindex nofollow" />
-	<title>{DEFAULT_TITLE} - {slug.charAt(0).toUpperCase() + slug.slice(1)}</title>
+	<title>{DEFAULT_TITLE} - {slug?.charAt(0).toUpperCase() + slug?.slice(1)}</title>
 </svelte:head>
 
 <div class="mx-auto max-w-2xl">
