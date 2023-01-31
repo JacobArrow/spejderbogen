@@ -15,7 +15,7 @@
 			scrollHeight: target.scrollHeight,
 			clientHeight: target.clientHeight,
 			clientWidth: target.clientWidth,
-			visibleFooter: isInViewport(document.getElementById('footer')),
+			visibleFooter: isInViewport(document.getElementById('footer'))
 		});
 	}
 
@@ -44,7 +44,7 @@
 	<input
 		id="main-drawer"
 		type="checkbox"
-		class="drawer-toggle"
+		class="drawer-toggle hidden"
 		bind:checked={$drawer}
 		on:change={drawer.toggle}
 	/>
@@ -61,8 +61,8 @@
 			<div class="navbar shadow-lg bg-neutral text-neutral-content flex w-full justify-center">
 				<div class="navbar-start">
 					<button
+						aria-label="Close"
 						class="btn btn-square btn-ghost stroke-current"
-						name="close"
 						on:click={drawer.toggle}><CloseIcon size="24px" /></button
 					>
 				</div>
