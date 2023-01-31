@@ -34,7 +34,7 @@
 	<slot {data} />
 {/each}
 <div
-	class="fixed xl:relative xl:flex xl:justify-center bottom-12 sm:bottom-14 xl:bottom-0 left-2/4 -translate-x-2/4 xl:col-span-full xl:mt-4"
+	class="fixed xl:relative xl:flex xl:justify-center bottom-12 sm:bottom-14 xl:bottom-0 left-2/4 -translate-x-2/4 xl:col-span-full xl:mt-4 z-10"
 >
 	<Pagination on:clicked={pagination} count={data.length} bind:from bind:to bind:page {show} />
 </div>
