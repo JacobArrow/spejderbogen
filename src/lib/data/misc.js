@@ -64,7 +64,7 @@ function createScrollPositionStore() {
 		clientHeight: 0,
 		scrollHeight: 0,
 		clientWidth: 0,
-		visibleFooter: false
+		footerOffset: 0
 	});
 
 	function set(obj) {
