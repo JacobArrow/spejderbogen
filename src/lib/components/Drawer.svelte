@@ -11,25 +11,40 @@
 
 	function setScroll(target) {
 		scrollPosition.set({
+			...$scrollPosition,
 			scrollTop: target.scrollTop,
 			scrollHeight: target.scrollHeight,
 			clientHeight: target.clientHeight,
-			clientWidth: target.clientWidth,
-			visibleFooter: isInViewport(document.getElementById('footer'))
+			clientWidth: target.clientWidth
 		});
 	}
 
-	function isInViewport(el) {
-		const rect = el.getBoundingClientRect();
-		return (
-			rect.top >= 0 &&
-			rect.left >= 0 &&
-			rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-			rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-		);
+	function setFooterOffset(offset) {
+		scrollPosition.set({
+			...$scrollPosition,
+			footerOffset: offset
+		});
+	}
+
+	function footerCallback(entries, observer) {
+		entries.forEach((entry) => {
+			setFooterOffset(entry.intersectionRect.height);
+		});
+	}
+
+	function createObserver(target, callback) {
+		const options = {
+			root: null,
+			threshold: [0, 0.1, 0.2, 0.3, 0.4, 0.5, 0.6, 0.7, 0.8, 0.9, 1]
+		};
+		const observer = new IntersectionObserver(callback, options);
+		observer.observe(target);
 	}
 
 	onMount(() => {
+		const footer = document.getElementById('footer');
+		createObserver(footer, footerCallback);
+
 		const resizeObserver = new ResizeObserver((entries) => {
 			const drawer = document.getElementById('drawer-content');
 			setScroll(drawer);
