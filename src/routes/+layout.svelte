@@ -30,9 +30,9 @@
 	}
 
 	onMount(async () => {
-		themeChange(false);
 		//set theme to dark if it's night
 		localStorage.setItem('theme', isDark ? 'dark' : 'light');
+		themeChange(false);
 		disableLogsInProduction();
 		await createLocalDatabase();
 	});
