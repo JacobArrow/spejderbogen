@@ -19,7 +19,11 @@
 	class="navbar shadow-lg bg-neutral text-neutral-content flex inset-x-0 sticky top-0 w-full z-50"
 >
 	<div class="flex-none xl:hidden sm:flex">
-		<button class="btn btn-square btn-ghost stroke-current" aria-label="menu" on:click={drawer.toggle}>
+		<button
+			class="btn btn-square btn-ghost stroke-current"
+			aria-label="menu"
+			on:click={drawer.toggle}
+		>
 			<MenuIcon size="24px" />
 		</button>
 	</div>
@@ -29,11 +33,11 @@
 	<div class="form-control flex-1 w-full relative mx-2 sm:mx-0">
 		<Search />
 	</div>
-	<div class="xl:flex hidden items-stretch">
+	<div class="xl:flex hidden items-stretch gap-1 mx-2">
 		{#each NAVBAR_LINKS as link}
 			<a
 				href={link.link}
-				class="btn btn-ghost mx-1 btn-md rounded-btn text-base"
+				class="btn btn-ghost btn-md rounded-btn text-base"
 				class:btn-active={$page.url.pathname === link.link}
 			>
 				{link.name}
@@ -42,20 +46,17 @@
 	</div>
 	<div class="justify-end items-end">
 		<button
-			class="theme-toggle btn btn-square btn-ghost sun"
-			data-set-theme="light"
-			data-act-class="active"
-			aria-label="light theme"
+			class="btn btn-square btn-ghost swap swap-rotate"
+			data-toggle-theme="dark,light"
+			data-act-class="swap-active"
+			aria-label="theme switch"
 		>
-			<SunIcon size="24px" />
-		</button>
-		<button
-			class="theme-toggle btn btn-square btn-ghost moon"
-			data-set-theme="dark"
-			data-act-class="active"
-			aria-label="dark theme"
-		>
-			<MoonIcon size="24px" />
+			<span class="swap-on">
+				<SunIcon size="24px" />
+			</span>
+			<span class="swap-off">
+				<MoonIcon size="24px" />
+			</span>
 		</button>
 	</div>
 </div>
