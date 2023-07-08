@@ -25,7 +25,7 @@
 
 	$: songRoute = `${relativePath}/${encode(song.name)}${urlParmas}`;
 	$: categoryRoute = `/kategorier/${encode(song.categories?.name)}`;
-	$: authorRoute = `/forfattere/${encode(song.authors[0]?.name)}`;
+	$: authorRoute = `/forfattere/${encode(song.authors[0]?.data?.name)}`;
 
 	const dispatch = createEventDispatcher();
 </script>
@@ -54,7 +54,7 @@
 					{/if}
 					{#if song.authors.length}
 						<a href={disabled ? null : authorRoute} class="link link-hover no-underline font-normal"
-							><div class="badge badge-ghost">{song.authors[0]?.name}</div></a
+							><div class="badge badge-ghost">{song.authors[0]?.data?.name}</div></a
 						>
 					{/if}
 					<Like songId={song.id} />
