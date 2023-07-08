@@ -32,9 +32,9 @@
 				{/if}
 				{#each song.authors as author}
 					<a
-						href="/forfattere/{encode(author.name)}"
+						href="/forfattere/{encode(author.data.name)}"
 						class="link link-hover no-underline font-normal"
-						><div class="badge badge-ghost">{author.name}</div></a
+						><div class="badge badge-ghost">{author.data.name}</div></a
 					>
 				{/each}
 				<div class="flex ml-auto">
