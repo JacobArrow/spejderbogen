@@ -3,6 +3,7 @@
 	import Card from './Card.svelte';
 	import Like from './Like.svelte';
 	import AddToList from './AddToList.svelte';
+	import RelatedSongs from './RelatedSongs.svelte';
 
 	//Functions
 	import { encode } from '$functions/convertUrl';
@@ -44,4 +45,5 @@
 			</div>
 		</div>
 	</Card>
+	<RelatedSongs categoryId={song.categori_id} />
 {/if}
