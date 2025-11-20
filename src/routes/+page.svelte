@@ -2,8 +2,7 @@
 	import { DEFAULT_TITLE } from '$data/env';
 
 	//Data
-	import { liveQuery } from 'dexie';
-	import { db } from '$data/db';
+	import { db, liveQuery } from '$data/db';
 	import PopularSongs from '$components/PopularSongs.svelte';
 	import Header from '$components/Header.svelte';
 	import SubHeader from '$components/Skeleton/SubHeader.svelte';

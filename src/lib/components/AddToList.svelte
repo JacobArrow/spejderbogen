@@ -9,8 +9,7 @@
 	import PenIcon from 'svelte-material-icons/Pen.svelte';
 
 	//Data
-	import { liveQuery } from 'dexie';
-	import { db } from '$data/db';
+	import { db, liveQuery } from '$data/db';
 
 	//Mics
 	import { fade } from 'svelte/transition';
