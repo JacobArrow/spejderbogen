@@ -11,47 +11,18 @@
 	import LinkIcon from 'svelte-material-icons/LinkVariant.svelte';
 
 	//Data
-	import { page } from '$app/stores';
-	import { liveQuery } from 'dexie';
-	import { db } from '$data/db';
+	import { db, liveQuery } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
 
-	//Misc
-	import { onMount } from 'svelte';
-
-	//functions
-	import { decode } from '$functions/convertUrl';
-	import { goto } from '$app/navigation';
-
-	let newListAdded = false;
 	let listToDelete = 0;
 	let checkDelete = false;
-
-	$: listName = decode($page.url.searchParams.get('name'));
-	$: listSongIds = $page.url.searchParams.get('ids');
 
 	$: lists = liveQuery(async () => {
 		return await db.lists.toArray();
 	});
 
-	onMount(async () => {
-		if (listName && listSongIds) {
-			await db.lists
-				.add({
-					name: listName,
-					ids: listSongIds.split(',').map((id) => parseInt(id)),
-					fromShare: true
-				})
-				.then((listId) => {
-					goto(`/lister/${listId}`, { replaceState: true });
-				});
-			newListAdded = true;
-		}
-	});
-
 	async function deleteList() {
 		await db.lists.delete(listToDelete);
-		newListAdded = false;
 		checkDelete = !checkDelete;
 	}
 </script>
@@ -70,9 +41,6 @@
 					path={`${list.id}`}
 					content={list.name}
 					badgeContent={`${list.ids.length} sange`}
-					classes={newListAdded && $lists.slice(-1).pop() === list
-						? 'animate-pulse short-animation'
-						: ''}
 				>
 					<button
 						class="btn btn-circle btn-xs btn-error h-7 w-7 absolute -top-2 -right-2 z-10"

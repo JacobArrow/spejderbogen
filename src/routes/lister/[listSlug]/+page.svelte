@@ -6,8 +6,7 @@
 	import Fab from '$lib/components/FAB.svelte';
 
 	//Data
-	import { liveQuery } from 'dexie';
-	import { db } from '$data/db';
+	import { db, liveQuery } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
 
 	//Icons
@@ -31,7 +30,7 @@
 	$: isTablet = $scrollPosition.clientWidth < 768;
 	$: iconSize = isTablet ? '25' : '30';
 	$: shareableLink = $data
-		? `${$page.url.host}/lister` +
+		? `${$page.url.host}/lister/del` +
 		  `?name=${encode($data.list.name, false)}` +
 		  `&ids=${$data.list.ids}`
 		: '';
@@ -45,11 +44,30 @@
 	let copied = false;
 
 	$: data = liveQuery(async () => {
-		const list = await db.lists.where('id').equals(parseInt(slug)).first();
-		const songs = await db.songs.bulkGet(list.ids);
-		listName = list.name;
-		listSongs = songs;
-		return { songs, list };
+		try {
+			const listId = parseInt(slug);
+			if (isNaN(listId)) {
+				console.error('Invalid list ID:', slug);
+				return undefined;
+			}
+
+			const list = await db.lists.where('id').equals(listId).first();
+			if (!list) {
+				// Return undefined instead of null to indicate loading state
+				return undefined;
+			}
+
+			const songs = await db.songs.bulkGet(list.ids || []);
+			// Filter out any undefined songs
+			const validSongs = songs.filter((song) => song !== undefined);
+
+			listName = list.name;
+			listSongs = validSongs;
+			return { songs: validSongs, list };
+		} catch (error) {
+			console.error('Error loading list:', error);
+			return undefined;
+		}
 	});
 
 	async function deleteList() {
@@ -99,7 +117,9 @@
 	<title>{DEFAULT_TITLE} - Liste</title>
 </svelte:head>
 
-{#if $data}
+{#if $data === undefined}
+	<p class="text-center">Indlæser liste...</p>
+{:else if $data}
 	{#if $data.list.fromShare}
 		<p class="text-sm text-center m-0">Denne liste er blevet delt med dig</p>
 	{/if}

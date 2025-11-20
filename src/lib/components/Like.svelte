@@ -4,8 +4,7 @@
 	import HeartIcon from 'svelte-material-icons/Heart.svelte';
 
 	//Data
-	import { liveQuery } from 'dexie';
-	import { db } from '$data/db';
+	import { db, liveQuery } from '$data/db';
 
 	export let songId;
 	$: song = { id: songId };

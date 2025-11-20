@@ -10,8 +10,7 @@
 	import Header from '$components/Header.svelte';
 
 	//Data
-	import { liveQuery } from 'dexie';
-	import { db } from '$data/db';
+	import { db, liveQuery } from '$data/db';
 	import { DEFAULT_TITLE } from '$data/env';
 	import { incrementCategory } from '$functions/increment';
 
