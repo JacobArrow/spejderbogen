@@ -16,26 +16,30 @@ function getDate() {
 
 export const incrementSong = async (songid: number) => {
 	if (getLastDate(songid, songPrefix) != getDate() && INCREMENT_VIEW) {
-		await self.fetch('/api/songs/increment', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ songid: songid })
-		});
-	setLastDate(songid, songPrefix);
+		try {
+			const res = await self.fetch('/api/songs/increment', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ songid })
+			});
+			if (res.ok) setLastDate(songid, songPrefix);
+		} catch {
+			// Offline -- will retry next visit
+		}
 	}
 };
 
 export const incrementCategory = async (categoryid: number) => {
 	if (getLastDate(categoryid, categoryPrefix) != getDate() && INCREMENT_VIEW) {
-		await self.fetch('/api/categories/increment', {
-			method: 'POST',
-			headers: {
-				'Content-Type': 'application/json'
-			},
-			body: JSON.stringify({ categoryid: categoryid })
-		});
-	setLastDate(categoryid, categoryPrefix);
+		try {
+			const res = await self.fetch('/api/categories/increment', {
+				method: 'POST',
+				headers: { 'Content-Type': 'application/json' },
+				body: JSON.stringify({ categoryid })
+			});
+			if (res.ok) setLastDate(categoryid, categoryPrefix);
+		} catch {
+			// Offline -- will retry next visit
+		}
 	}
 };
