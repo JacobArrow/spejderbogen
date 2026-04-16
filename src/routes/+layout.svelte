@@ -11,6 +11,7 @@
 	import { DEFAULT_TITLE, VERCEL_ENV } from '$data/env';
 	import createLocalDatabase from '$data/db';
 	import Footer from '$components/Footer.svelte';
+	import InstallPrompt from '$components/InstallPrompt.svelte';
 	dayjs.extend(isBetween);
 
 	const lng = 55.6761;
@@ -46,6 +47,7 @@
 		</div>
 	</main>
 	<Footer />
+	<InstallPrompt />
 </Drawer>
 
 <svelte:window bind:online />
