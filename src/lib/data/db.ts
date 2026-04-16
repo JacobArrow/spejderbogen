@@ -1,6 +1,5 @@
 import Dexie, { type Table, liveQuery as dexieLiveQuery } from 'dexie';
 import { browser } from '$app/environment';
-import { isOnline } from './misc';
 import { readable } from 'svelte/store';
 
 const doDeleteDb = false;
@@ -142,56 +141,51 @@ function deleteDb() {
 	return true;
 }
 
-export default async function createLocalDatabase() {
-	if (isOnline) {
+export async function hasLocalData(): Promise<boolean> {
+	if (!browser) return false;
+	const count = await db.songs.count();
+	return count > 0;
+}
+
+export default async function createLocalDatabase(): Promise<{ synced: boolean }> {
+	if (!browser || !navigator.onLine) {
+		return { synced: false };
+	}
+
+	try {
 		const songs = await getData('/api/songs');
 		const songAuthors = await getData('/api/song-author');
 		let authors = await getData('/api/authors');
 		let categories = await getData('/api/categories');
-		if (songs && authors && categories && deleteDb) {
+
+		if (songs?.error || authors?.error || categories?.error || songAuthors?.error) {
+			console.warn('API returned errors during sync, skipping DB update');
+			return { synced: false };
+		}
+
+		if (songs && authors && categories && songAuthors) {
+			deleteDb();
 			categories = addCategorySongCount(songs, categories);
 			authors = addAuthorSongCount(authors, songAuthors);
-			db.transaction('rw', db.songs, db.categories, db.authors, db.song_authors, async function () {
-				//Songs
-				await db.songs
-					.bulkPut(songs)
-					.then(function (lastKey) {
-						console.log(`${lastKey} songs loaded`);
-					})
-					.catch(() => {
-						console.log('songs could not be loaded');
-					});
-				//Categories
-				await db.categories
-					.bulkPut(categories)
-					.then(function (lastKey) {
-						console.log(`${lastKey} categories loaded`);
-					})
-					.catch(() => {
-						console.log('categories could not be loaded');
-					});
-				//Authors
-				await db.authors
-					.bulkPut(authors)
-					.then(function (lastKey) {
-						console.log(`${lastKey} authors loaded`);
-					})
-					.catch(() => {
-						console.log('authors could not be loaded');
-					});
-				//Song-author
-				await db.song_authors
-					.bulkPut(songAuthors)
-					.then(function (lastKey) {
-						console.log(`${lastKey} song_authors loaded`);
-					})
-					.catch(() => {
-						console.log('authors could not be loaded');
-					});
-			}).catch(function (error) {
-				console.error(error);
-			});
+			await db.transaction(
+				'rw',
+				db.songs,
+				db.categories,
+				db.authors,
+				db.song_authors,
+				async () => {
+					await db.songs.bulkPut(songs);
+					await db.categories.bulkPut(categories);
+					await db.authors.bulkPut(authors);
+					await db.song_authors.bulkPut(songAuthors);
+				}
+			);
+			console.log('Database synced successfully');
+			return { synced: true };
 		}
-		//TODO: Add error to frontend
+	} catch (err) {
+		console.warn('Offline or sync failed, using cached data:', err);
 	}
+
+	return { synced: false };
 }
